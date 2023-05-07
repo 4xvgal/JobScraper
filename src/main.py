@@ -20,5 +20,5 @@ button = browser.find_element(By.CLASS_NAME, 'btn')
 button.click()
 
 #구인 정보
-items = browser.find_element(By.CLASS_NAME, 'top')
+items = browser.find_element(By.CLASS_NAME, 'top') # items 는 채용정보 하나의 틀 전체를 저장한다.
 
