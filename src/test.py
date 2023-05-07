@@ -30,8 +30,7 @@ for item in items:
     name = item.find_element(By.CSS_SELECTOR, 'div.txt > span').text
     names.append(name)
     # infos = item.find_elements(By.CSS_SELECTOR, 'cp-info > p')
-    
-    
+
 print(names)
 
 
