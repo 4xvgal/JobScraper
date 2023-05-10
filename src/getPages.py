@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+#미완성
 
 def getMaxpages(url):      #Url 의 최대 페이지 수를 return 하는 함수             
     response = requests.get(url)
