@@ -1,7 +1,7 @@
 import csv
 import re
 
-def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸어줍니다.
+def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸어줍니다. 매개변수는 csv.Reader 혹은 csv.DictReader로 저장한 변수입니다.
     salaries = start['연봉']
     rows = list(start)
 
