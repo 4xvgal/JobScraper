@@ -23,4 +23,5 @@ def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸�
 
         # 수정된 연봉 값을 업데이트합니다.
         row['연봉'] = cleaned_salary
+    #수정된 데이터를 반환합니다.
     return cleaned_salary
