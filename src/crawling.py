@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC #웹의 특정 요소가 추가 될때 까지 기다리게 하는 코드 추가
 from selenium.common.exceptions import NoSuchElementException #예외처리를 위함
-from selenium.common.exceptions import TimeoutException 
 from bs4 import BeautifulSoup
 
 import requests
@@ -51,16 +50,10 @@ csvWirter = csv.writer(f)
 for page_index in range(1, page_count+1):                                          
     new_url = variable.replace("pageIndex=1", f"pageIndex={page_index}")  
     browser.get(new_url)  # selenium을 사용하여 실제로 페이지를 이동
+    time.sleep(2)  # 페이지 로딩을 위해 잠시 대기
+    html = browser.page_source  # 현재 페이지의 HTML을 가져옴
+    soup = BeautifulSoup(html , 'html.parser')
 
-try:
-    WebDriverWait(browser, 15).until(
-        EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'li.cont-right'))
-    )
-except TimeoutException:
-    pass
-
-
-    html = browser.page_source 
     # 이 페이지에서의 구인 정보를 가져옵니다.
     items = browser.find_elements(By.CSS_SELECTOR, 'li.cont-right')
     for item in items:

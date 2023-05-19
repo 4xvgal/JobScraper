@@ -46,11 +46,11 @@ f = open(r"C:\Users\gwon9\Documents\Python project\data.csv", 'w',encoding='CP94
 csvWirter = csv.writer(f)    
 
 
-# ...
+# ...   
 for page_index in range(1, page_count+1):                                          
     new_url = variable.replace("pageIndex=1", f"pageIndex={page_index}")  
     browser.get(new_url)  # selenium을 사용하여 실제로 페이지를 이동
-    time.sleep(3)  # 페이지 로딩을 위해 잠시 대기
+    time.sleep(2)  # 페이지 로딩을 위해 잠시 대기
     html = browser.page_source  # 현재 페이지의 HTML을 가져옴
     soup = BeautifulSoup(html , 'html.parser')
 
