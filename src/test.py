@@ -99,8 +99,8 @@ if __name__ == '__main__':
         total_page.append(i)
 
     variable = browser.current_url                                       #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
-   
 
+    print("test")
     # 멀티 프로세스 적용
     pool = multiprocessing.Pool(processes=16)                             #8개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
     pool.starmap(get_items, [(page, variable) for page in total_page])   #get_items 함수 작업 요소를 전달합니다 , 전체 페이지 수 리스트와 현재 주소입니다.
