@@ -1,9 +1,8 @@
 import csv
 import re
-
+import basicFunc as bf
 def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸어줍니다. 매개변수는 csv.Reader 혹은 csv.DictReader로 저장한 변수입니다.
     rows = list(start)
-
     # 각 행의 연봉 데이터를 수정합니다.
     for row in rows:
         salary = row['연봉']
@@ -20,7 +19,6 @@ def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸�
             cleaned_salary = salary
         # 수정된 연봉 값을 업데이트합니다.
         row['연봉'] = cleaned_salary
-
     #수정된 데이터를 반환합니다.
     # Extracting column names from the first row
     fieldnames = list(rows[0].keys())
@@ -39,7 +37,6 @@ def locationConv(reader):#'근무지' 열에서 필요없는 문구를 삭제합
 
     #행 데이터 초기화
     rows = list(reader)
-   
     def remove_non_list_strings(string, allowed_strings):
         filtered_string = ' '.join(word for word in string.split() if word in allowed_strings)
         return filtered_string
@@ -72,3 +69,28 @@ def locationConv(reader):#'근무지' 열에서 필요없는 문구를 삭제합
 
     return edited_rows
 
+# 데이터를 이중으로 포함하고있는 연봉데이터를 최소 최대값으로 분리하여 새로운 열에 저장합니다.
+def addMaxMinRow(reader): #import_path는 열어서 수정할 파일의 경로입니다. export_path는 저장할 경로입니다.
+        rows = list(reader)
+        #각 행의 연봉을 수정합니다.
+        for row in rows:
+            salary = row['연봉']
+            numbers = re.findall(r'\d+', salary)
+            
+            if len(numbers) >= 8:
+                #숫자가 8개 이상인 경우 숫자 4개씩을 최솟값과 최댓값으로 분리하여 저장합니다.
+                min_salaries = numbers[:4]
+                max_salaries = numbers[4:8]
+            else:
+                #숫자가 8개 미만인 경우에는 빈 리스트로 저장힙니다.
+                    min_salaries = []
+                    max_salaries = []
+            row['최솟값'] = ' '.join(min_salaries)
+            row['최댓값'] = ' '.join(max_salaries)
+
+        #수정된 데이터를 반환
+        fieldnames = reader.fieldnames + ['최솟값', '최댓값'] #새로운 열 추가
+        edited_rows = [fieldnames] + [list(row.values()) for row in rows]
+        print(edited_rows)
+        
+        return edited_rows
