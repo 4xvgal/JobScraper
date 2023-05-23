@@ -10,4 +10,5 @@
 test_branch 를 부모 브랜치로 사용하시길 바랍니다.
 변경사항을 푸쉬하시고 pull request 를 사용하여 변경사항 적용을 요청하시길 바랍니다.
 
-!코드에 주석을 달아주시기 바랍니다!
+### 브랜치 규칙
+[브랜치 규칙](https://github.com/4xvgal/JobScraper/blob/Master/gitBranchRules.md)
