@@ -12,6 +12,19 @@ import pandas as pd
 import time
 import csv
 
+def page_count(broswer, section):
+    total_items = browser.find_element(By.CSS_SELECTOR, section).text
+    total_items = int(total_items.replace(",",""))                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
+    page_count = total_items // 10
+    total_page = []
+
+    if total_items % 10 > 0:
+        page_count += 1
+    
+    for i in range(page_count):
+        total_page.append(i)
+    return total_page
+
 
 
 
@@ -29,7 +42,7 @@ def get_items(page_index, url):
     print(new_url)
     
 
-    with open(r"C:\CSV\data.csv", 'a', encoding='CP949', newline='') as f:     #csv 파일생성
+    with open(r"C:\CSV\data.csv", 'a', encoding='UTF-8', newline='') as f:     #csv 파일생성
         csvWriter = csv.writer(f)
 
         for item in items:
@@ -86,18 +99,8 @@ if __name__ == '__main__':
     button.click()
 
 
-    #최대페이지 계산    
-    total_items = browser.find_element(By.CSS_SELECTOR, 'span.font-size-14.font-cgray em.count').text
-    total_items = int(total_items.replace(",",""))                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
-    page_count = total_items // 10
-    total_page = []
-
-    if total_items % 10 > 0:
-        page_count += 1
-    
-    for i in range(page_count):
-        total_page.append(i)
-
+    #최대페이지 계산 함수
+    total_page = page_count(browser,'span.font-size-14.font-cgray em.count') 
     variable = browser.current_url                                       #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
 
     print("test")
