@@ -7,7 +7,7 @@
 [깃 사용법](https://backlog.com/git-tutorial/kr/intro/intro1_1.html)
 
 지역 브랜치를 만들 때에는
-test_branch 를 부모 브랜치로 사용하시길 바랍니다.
+develop_Feature 를 부모 브랜치로 사용하시길 바랍니다.
 변경사항을 푸쉬하시고 pull request 를 사용하여 변경사항 적용을 요청하시길 바랍니다.
 
 ### 브랜치 규칙
