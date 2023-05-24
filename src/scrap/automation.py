@@ -14,13 +14,13 @@ import time
 import csv
 
 
-def automation(url , word):
+def auto_motive(url , word):
     chrome_options = Options()
     # headless 설정
     chrome_options.headless = True
     start_time = time.time()
     browser = webdriver.Chrome()                      #webdriver를 Chrome 으로 설정함
-    browser.get(url))             #워크넷의 url 저장
+    browser.get(url)            #워크넷의 url 저장
     browser.implicitly_wait(10)                       #최대 10초까지 기다리게 하는 함수 특정요소를 찾기 위해 10초 동안 대기. 시간 안에 찾아질시 즉시 중단. -HG
     search = browser.find_element(By.ID, 'topQuery')  #element 중 'topQuery'를 검색한다.
     search.click()                                    #검색한 element를 클릭한다
