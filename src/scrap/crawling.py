@@ -11,6 +11,8 @@ import pandas as pd
 import time
 import csv
 
+
+
 def get_items(page_index, url):
 
 
