@@ -29,7 +29,7 @@ def get_items(page_index, url):
     print(new_url)
     
 
-    with open(r"C:\CSV\data.csv", 'a', encoding='CP949', newline='') as f:     #csv 파일생성
+    with open(r"C:\CSV\data.csv", 'a', encoding='UTF-8', newline='') as f:     #csv 파일생성 //HG- 이거 이전에 있던 데이터위에 append해서 'a'를 'w'로 고쳤는데 'a'로 한 이유가 있어?
         csvWriter = csv.writer(f)
 
         for item in items:
