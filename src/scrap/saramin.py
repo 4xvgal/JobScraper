@@ -11,10 +11,14 @@ import requests
 import pandas as pd
 import time
 import csv
+import re
+
+def extract_number(string):  #문자열에서 숫자만 추출
+    return int(''.join(re.findall(r'\d+', string.replace(',', ''))))
 
 def page_count(broswer, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
-    total_items = int(total_items.replace(",",""))                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
+    total_items = extract_number(total_items)                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
     page_count = total_items // 10
     total_page = []
 
@@ -37,7 +41,7 @@ def get_items(page_index, url):
     response = requests.get(new_url)   # 각 페이지 마다 파싱(BeautifulSoup)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
-    items = soup.select("li.cont-right")
+    items = soup.select("div.content")
 
     print(new_url)
     
@@ -47,29 +51,29 @@ def get_items(page_index, url):
 
         for item in items:
             try:
-                name = item.select_one('div.txt > span').get_text(strip=True)  # 딸려오는 개행문자 제거 - 에러수정   23/05/17
+                name = item.select_one('div.company-name a').get_text(strip=True)  # 딸려오는 개행문자 제거 - 에러수정   23/05/17
             except AttributeError:
                 name = 'N/A'
 
             try:
-                form = item.select_one('.cp-info > p > span:nth-child(1)').get_text(strip=True)
+                form = item.select_one('div.job_condition > span::nth-child(4)').get_text(strip=True)
             except AttributeError:
                 form = 'N/A'    
 
             try:
-                carrer = item.select_one('.cp-info > p > span:nth-child(2)').get_text(strip=True)
+                carrer = item.select_one('div.job_condition > span::nth-child(2)').get_text(strip=True)
                
             except AttributeError:
                 carrer = 'N/A'
 
             try:
-                salary = item.select_one('.cp-info > p > span:nth-child(4)').get_text(strip=True)
+                salary = item.select_one().get_text(strip=True)
                
             except AttributeError:
                 salary = 'N/A'
 
             try:
-                locate = item.select_one('.cp-info > p:nth-child(2) > span:nth-child(1)').get_text(strip=True)
+                locate = item.select_one().get_text(strip=True)
                 
             except AttributeError:
                 locate = 'N/A'
@@ -86,21 +90,23 @@ if __name__ == '__main__':
     chrome_options.headless = True
     start_time = time.time()
     browser = webdriver.Chrome()                      #webdriver를 Chrome 으로 설정함
-    browser.get('https://www.work.go.kr')             #워크넷의 url 저장
+    browser.get('https://www.saramin.co.kr/')             #워크넷의 url 저장
     browser.implicitly_wait(10)                       #최대 10초까지 기다리게 하는 함수 특정요소를 찾기 위해 10초 동안 대기. 시간 안에 찾아질시 즉시 중단. -HG
-    search = browser.find_element(By.ID, 'topQuery')  #element 중 'topQuery'를 검색한다.
+    search = browser.find_element(By.ID, 'btn_search')  #검색 버튼을 찾아 상호작용. 사람인의 경우 검색 전 상호작용이 필요함
+    search.click()
+    search = browser.find_element(By.CSS_SELECTOR, 'input.key')  #상호 작용 후 검색창 클릭
     search.click()                                    #검색한 element를 클릭한다
     keyword = input("입력하세요 : ")                   #검색할단어를 콘솔에서 input 받는다
     search.send_keys(keyword)                         #keyword를 검색창에 전송한다
     search.send_keys(Keys.ENTER)                      #Enter 키를 전송한다
     wait = WebDriverWait(browser, 10)                 #10초간 기다린다. - 해당부분 로딩완료되는 시점까지만 wait 할수 있는지 궁금함 -jm
-    element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')))  #-> 이 코드의 추가로 특정 요소가 찾아 진다면 즉시 중단 - HG
-    button = browser.find_element(By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')  
+    element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')))  #-> 이 코드의 추가로 특정 요소가 찾아 진다면 즉시 중단 - HG
+    button = browser.find_element(By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')  
     button.click()
 
 
     #최대페이지 계산 함수
-    total_page = page_count(browser,'span.font-size-14.font-cgray em.count') 
+    total_page = page_count(browser,'span.cnt_result') 
     variable = browser.current_url                                       #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
 
     print("test")
