@@ -96,13 +96,14 @@ def addMaxMinRow(reader):
 #연봉행 에서 필요한 데이터를 추출해 새로운 행에 저장합니다.
 def addNewSalaries(reader):
     rows = list(reader)
+    rfmd = ''
     for row in rows:
         salary = row['연봉']
         #월급을 연봉으로 바꾸어 저장합니다.
-        if '월급' in row:
+        if '월급' in salary:
             rfmd = strMonthToYear(salary)
         #연봉데이터만 추출합니다
-        elif '연봉' in row:
+        elif '연봉' in salary:
             rfmd = strYearEdit(salary)
         row['edited_연봉'] = rfmd
     fieldnames = list(rows[0].keys())
@@ -111,20 +112,22 @@ def addNewSalaries(reader):
 
 #문자열에서 월급을 연봉으로 바꿉니다.
 def strMonthToYear(strData):
+    reformedStr =''
     if '~' in strData: 
         allowed = ['~']
         reformed = removeNonListedNonDigit(strData,allowed)
         start, end = reformed.split('~') # 월급이 x ~ y 형태를 띄면 그 중간값을 사용함
-        month = (int(start) + int(end))/ 2
+        month = int((int(start) + int(end))/ 2)
         year = month * 12
-        reformedStr = str(year)
+        reformedStr = year
     else:
-        reformed= removeNonListedNonDigit(strData)
+        reformed= removeNonListedNonDigit(strData,['~'])
         year = int(reformed) * 12
-        reformedStr = str(year)
-    return reformedStr
+        reformedStr = year
+    #debug
+    return str(reformedStr)
 
-#문자열에서 연봉을 단일 데이터로 추출합니다.
+#문자열에서 연봉을 단일 데이터로 추출합니다. #작동됨
 def strYearEdit(strData):
     reformedStr= ''
     if '~' in strData:
@@ -135,7 +138,7 @@ def strYearEdit(strData):
         reformedStr = str(year)
     else:
         reformedStr = removeNonListedNonDigit(strData)
-    return reformedStr
+    return str(reformedStr)
         
 #문자열에서 리스트에 있지 않는 모든 문자를 제거 합니다.
 def remove_non_list_strings(string, allowed_strings):
