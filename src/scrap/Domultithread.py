@@ -2,7 +2,7 @@
 #사이트 Url 을 startfucntion 으로 넘기는 부분에서 멀티 프로세스 적용하고
 #crawling 부에서 멀테스레드 적용 
 from concurrent.futures import ThreadPoolExecutor
-from crawling import get_items
+from crawl_BS import get_items
 
 def multi_thread(total_page , variable):
     pool = ThreadPoolExecutor(3)
