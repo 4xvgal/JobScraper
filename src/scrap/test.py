@@ -97,11 +97,11 @@ if __name__ == '__main__':
     element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')))  #-> 이 코드의 추가로 특정 요소가 찾아 진다면 즉시 중단 - HG
     button = browser.find_element(By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')  
     button.click()
-
+    variable = browser.current_url #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
 
     #최대페이지 계산 함수
     total_page = page_count(browser,'span.font-size-14.font-cgray em.count') 
-    variable = browser.current_url                                       #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
+
 
     print("test")
     # 멀티 프로세스 적용
