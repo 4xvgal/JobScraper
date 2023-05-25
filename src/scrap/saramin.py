@@ -77,6 +77,7 @@ def get_items(page_index, url):
                 
             except AttributeError:
                 locate = 'N/A'
+                
 
             csvWriter.writerow([name, carrer, form, salary, locate])
 
@@ -90,7 +91,7 @@ if __name__ == '__main__':
     chrome_options.headless = True
     start_time = time.time()
     browser = webdriver.Chrome()                      #webdriver를 Chrome 으로 설정함
-    browser.get('https://www.saramin.co.kr/')             #워크넷의 url 저장
+    browser.get('https://www.saramin.co.kr/')             #사람인의 url 저장
     browser.implicitly_wait(10)                       #최대 10초까지 기다리게 하는 함수 특정요소를 찾기 위해 10초 동안 대기. 시간 안에 찾아질시 즉시 중단. -HG
     search = browser.find_element(By.ID, 'btn_search')  #검색 버튼을 찾아 상호작용. 사람인의 경우 검색 전 상호작용이 필요함
     search.click()
@@ -121,7 +122,7 @@ if __name__ == '__main__':
     header = ['회사명', '경력','고용형태', '급여', '근무지']  # 추가할 헤더 정보
 
     # 기존 데이터 읽기
-    data = []
+    data = []   
     with open(filename, 'r', newline='') as file:
         reader = csv.reader(file)
         data = list(reader)

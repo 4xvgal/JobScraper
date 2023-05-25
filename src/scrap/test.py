@@ -12,6 +12,13 @@ import pandas as pd
 import time
 import csv
 
+def select_info(item, section):
+    try:
+        return item.select_one(section).get_text(strip=True)  # 딸려오는 개행문자 제거 - 에러수정   23/05/17
+    except AttributeError:
+        return 'N/A'
+
+
 def page_count(broswer, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
     total_items = int(total_items.replace(",",""))                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
@@ -46,35 +53,16 @@ def get_items(page_index, url):
         csvWriter = csv.writer(f)
 
         for item in items:
-            try:
-                name = item.select_one('div.txt > span').get_text(strip=True)  # 딸려오는 개행문자 제거 - 에러수정   23/05/17
-            except AttributeError:
-                name = 'N/A'
+            name = select_info(item,'div.txt > span')
+            form = select_info(item,'.cp-info > p > span:nth-child(1)')
+            carrer = select_info(item,'.cp-info > p > span:nth-child(2)')
+            salary = select_info(item,'.cp-info > p > span:nth-child(4)')
+            locate = select_info(item,'.cp-info > p:nth-child(2) > span:nth-child(1)')
+            title = select_info(item, 'div.link > a')
+            link = item.select_one('a').get('href')
 
-            try:
-                form = item.select_one('.cp-info > p > span:nth-child(1)').get_text(strip=True)
-            except AttributeError:
-                form = 'N/A'    
 
-            try:
-                carrer = item.select_one('.cp-info > p > span:nth-child(2)').get_text(strip=True)
-               
-            except AttributeError:
-                carrer = 'N/A'
-
-            try:
-                salary = item.select_one('.cp-info > p > span:nth-child(4)').get_text(strip=True)
-               
-            except AttributeError:
-                salary = 'N/A'
-
-            try:
-                locate = item.select_one('.cp-info > p:nth-child(2) > span:nth-child(1)').get_text(strip=True)
-                
-            except AttributeError:
-                locate = 'N/A'
-
-            csvWriter.writerow([name, carrer, form, salary, locate])
+            csvWriter.writerow([title,name, carrer, form, salary, locate, link])
 
 
 if __name__ == '__main__':
@@ -112,7 +100,7 @@ if __name__ == '__main__':
                                 
 
     filename = r'C:\CSV\data.csv'  # 기존의 CSV 파일 경로
-    header = ['회사명', '경력','고용형태', '급여', '근무지']  # 추가할 헤더 정보
+    header = ['제목','회사명', '경력','고용형태', '급여', '근무지','링크']  # 추가할 헤더 정보
 
     # 기존 데이터 읽기
     data = []
