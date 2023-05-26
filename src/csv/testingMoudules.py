@@ -8,8 +8,6 @@ import csvFunc as cf
 file_path = "src/csv/forTestFiles/data2.csv"
 export_path = "src/csv/forTestFiles/cleaned.csv"
 
-<<<<<<< HEAD
-
 #월봉을 연봉으로 바꾸기
 with open(file_path, 'r',encoding='utf-8') as file:
     reader = csv.DictReader(file)
@@ -28,6 +26,4 @@ with open(export_path,'r',encoding='utf-8') as file:
     cleaned_data = ce.addMaxMinRow(reader)
     bf.save_to_csv(cleaned_data,export_path,'utf-8',True)
 
-=======
 cf.csvEdit(file_path, export_path)
->>>>>>> eeb58f1 (Merge pull request #40 from 4xvgal/dev_Fea_4xvgal)
