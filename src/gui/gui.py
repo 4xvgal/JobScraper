@@ -3,11 +3,11 @@ import csv
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-def search():
+def search(filePath):
     query = entry.get()  # 검색 입력창의 텍스트 가져오기
-
-    # CSV 파일 읽기
-    with open('data.csv', 'r') as file:
+    
+    # CSV 파일 읽기 (filePath 는 csv 파일 경로)
+    with open(filePath, 'r',encoding = 'utf-8') as file:
         csv_reader = csv.reader(file)
         header = next(csv_reader)  # 헤더 라인 스킵
 
