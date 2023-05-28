@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC #웹의 특정 요소가 추가 될때 까지 기다리게 하는 코드 추가
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 
@@ -13,12 +13,30 @@ import time
 import csv
 import re
 
-def extract_number(string):  #문자열에서 숫자만 추출
+def select_info(item, section=None):
+    try:
+        return item.select_one(section).get_text(strip=True)
+    except AttributeError:
+        return 'N/A'
+    
+def scroll_down(browser):
+    last_height = browser.execute_script("return document.body.scrollHeight")
+
+    while True:
+        browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)
+
+        new_height = browser.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+def extract_number(string): 
     return int(''.join(re.findall(r'\d+', string.replace(',', ''))))
 
-def page_count(broswer, section):
+def page_count(browser, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
-    total_items = extract_number(total_items)                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
+    total_items = extract_number(total_items)
     page_count = total_items // 10
     total_page = []
 
@@ -29,111 +47,61 @@ def page_count(broswer, section):
         total_page.append(i)
     return total_page
 
-
-
-
-#현재 페이지의 구인정보 추출  멀티 프로세싱 적용을 위해 함수로 구현하였습니다.
 def get_items(page_index, url):
+    chrome_options = Options()
+    chrome_options.headless = True
+    browser = webdriver.Chrome(options=chrome_options)
 
-
-
-    new_url = url.replace("pageIndex=1", f"pageIndex={page_index}")  # page_index 위치에 해당하는 페이지의 주소 new_url
-    response = requests.get(new_url)   # 각 페이지 마다 파싱(BeautifulSoup)
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')
-    items = soup.select("div.content")
-
-    print(new_url)
+    new_url = url.replace("pageIndex=1", f"pageIndex={page_index}")
+    browser.get(new_url)
+    time.sleep(5)
     
+    scroll_down(browser)
 
-    with open(r"C:\CSV\data.csv", 'a', encoding='UTF-8', newline='') as f:     #csv 파일생성
+    html = browser.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    items = soup.select("div.item_recruit")
+
+    with open(r"C:\CSV\data.csv", 'a', encoding='UTF-8', newline='') as f: 
         csvWriter = csv.writer(f)
 
         for item in items:
-            try:
-                name = item.select_one('div.company-name a').get_text(strip=True)  # 딸려오는 개행문자 제거 - 에러수정   23/05/17
-            except AttributeError:
-                name = 'N/A'
+            name = select_info(item,'div.company-name > a')
+            form = select_info(item,'div.job_condition > span::nth-child(4)')
+            carrer = select_info(item,'div.job_condition > span::nth-child(2)')
+            salary = select_info(item,)
+            locate = select_info(item,'div.job_condition > span::nth-child(1)')
+            title = select_info(item, 'h2.job_tit')
+            link = item.select_one('a').get('href')
 
-            try:
-                form = item.select_one('div.job_condition > span::nth-child(4)').get_text(strip=True)
-            except AttributeError:
-                form = 'N/A'    
+            csvWriter.writerow([title,name, carrer, form, salary, locate, link])
 
-            try:
-                carrer = item.select_one('div.job_condition > span::nth-child(2)').get_text(strip=True)
-               
-            except AttributeError:
-                carrer = 'N/A'
-
-            try:
-                salary = item.select_one().get_text(strip=True)
-               
-            except AttributeError:
-                salary = 'N/A'
-
-            try:
-                locate = item.select_one().get_text(strip=True)
-                
-            except AttributeError:
-                locate = 'N/A'
-                
-
-            csvWriter.writerow([name, carrer, form, salary, locate])
-
+    browser.close()
 
 if __name__ == '__main__':
-    
-   
-    # 자동화 구현
     chrome_options = Options()
-    # headless 설정
     chrome_options.headless = True
     start_time = time.time()
-    browser = webdriver.Chrome()                      #webdriver를 Chrome 으로 설정함
-    browser.get('https://www.saramin.co.kr/')             #사람인의 url 저장
-    browser.implicitly_wait(10)                       #최대 10초까지 기다리게 하는 함수 특정요소를 찾기 위해 10초 동안 대기. 시간 안에 찾아질시 즉시 중단. -HG
-    search = browser.find_element(By.ID, 'btn_search')  #검색 버튼을 찾아 상호작용. 사람인의 경우 검색 전 상호작용이 필요함
+    browser = webdriver.Chrome()
+    browser.get('https://www.saramin.co.kr/') 
+    browser.implicitly_wait(10)
+    search = browser.find_element(By.ID, 'btn_search')
     search.click()
-    search = browser.find_element(By.CSS_SELECTOR, 'input.key')  #상호 작용 후 검색창 클릭
-    search.click()                                    #검색한 element를 클릭한다
-    keyword = input("입력하세요 : ")                   #검색할단어를 콘솔에서 input 받는다
-    search.send_keys(keyword)                         #keyword를 검색창에 전송한다
-    search.send_keys(Keys.ENTER)                      #Enter 키를 전송한다
-    wait = WebDriverWait(browser, 10)                 #10초간 기다린다. - 해당부분 로딩완료되는 시점까지만 wait 할수 있는지 궁금함 -jm
-    element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')))  #-> 이 코드의 추가로 특정 요소가 찾아 진다면 즉시 중단 - HG
-    button = browser.find_element(By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')  
+    search = browser.find_element(By.CSS_SELECTOR, 'input.key')
+    search.click()
+    keyword = input("입력하세요 : ")
+    search.send_keys(keyword)
+    search.send_keys(Keys.ENTER)
+    wait = WebDriverWait(browser, 10)
+    element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')))
+    button = browser.find_element(By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')
     button.click()
+    time.sleep(2)
+    total_page = page_count(browser, "#list_sort > div > div:nth-child(3) > span:nth-child(1)")
+    variable = browser.current_url
+    browser.close()
 
+    with multiprocessing.Pool(processes=8) as pool:  #너무 많이 돌리면 서버 부하가 심함
+        pool.starmap(get_items, [(page, variable) for page in total_page])
 
-    #최대페이지 계산 함수
-    total_page = page_count(browser,'span.cnt_result') 
-    variable = browser.current_url                                       #입력된 키워드의 페이지 현재 주소를 variable 에 입력받음
-
-    print("test")
-    # 멀티 프로세스 적용
-    pool = multiprocessing.Pool(processes=16)                             #8개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
-    pool.starmap(get_items, [(page, variable) for page in total_page])   #get_items 함수 작업 요소를 전달합니다 , 전체 페이지 수 리스트와 현재 주소입니다.
-    pool.close()                                                         # 테스트에 사용한 키워드는 '백엔드' 89개 회사 정보를 크롤링합니다. 기존 코드 30초에서 20초로 10 초 단축시켰습니다.
-    pool.join()
-                                
-
-    filename = r'C:\CSV\data.csv'  # 기존의 CSV 파일 경로
-    header = ['회사명', '경력','고용형태', '급여', '근무지']  # 추가할 헤더 정보
-
-    # 기존 데이터 읽기
-    data = []   
-    with open(filename, 'r', newline='') as file:
-        reader = csv.reader(file)
-        data = list(reader)
-
-    # 헤더 추가
-    data.insert(0, header)
-
-    # 수정된 데이터를 새로운 파일에 쓰기
-    new_filename = r'C:\CSV\data1.csv'                       # 새로 생성될 파일 경로
-    with open(new_filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(data)
-                                                            
-    print("--- %s seconds ---" % (time.time() - start_time)) # 속도 측정용 코드입니다 .. 
+    print("--- %s seconds ---" %(time.time() - start_time))

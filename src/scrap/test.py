@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
     # 기존 데이터 읽기
     data = []
-    with open(filename, 'r', newline='') as file:
+    with open(filename, 'r', encoding='utf-8',newline='') as file:
         reader = csv.reader(file)
         data = list(reader)
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
     # 수정된 데이터를 새로운 파일에 쓰기
     new_filename = r'C:\CSV\data1.csv'                       # 새로 생성될 파일 경로
-    with open(new_filename, 'w', newline='') as file:
+    with open(new_filename, 'w', encoding='utf-8',newline='') as file:
         writer = csv.writer(file)
         writer.writerows(data)
                                                             
