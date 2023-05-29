@@ -20,6 +20,7 @@ def select_info(item, section=None):                                            
     else:
         return selected_element.get_text(strip=True)
 
+
 def get_info(page_index, url, route, veriable):
     # 사람인 크롤링
     def get_saramin():
