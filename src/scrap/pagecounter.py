@@ -19,16 +19,17 @@ def page_count(browser , section, url):
        
         total_items = browser.find_element(By.CSS_SELECTOR, section).text
         total_items = extract_number(total_items)                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
-        page_count = total_items // 10
-        total_page = []    
+        page_count = total_items // 39
+        total_page = []   
       
         if total_items % 10 > 0:
             page_count += 1
+
     
-        for i in range(page_count):
+        for i in range(1, page_count + 1):
             total_page.append(i)
 
-
+       
         return total_page
        
                     
@@ -42,10 +43,10 @@ def page_count(browser , section, url):
         if total_items % 10 > 0:
            page_count += 1
     
-        for i in range(page_count):
+        for i in range(1 , page_count+1):
             total_page.append(i)
         
- 
+    
         return total_page
 
     

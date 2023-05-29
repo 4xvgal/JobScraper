@@ -20,13 +20,10 @@ def saramin(url, word):
     search.click()
     search = browser.find_element(By.CSS_SELECTOR, 'input.key')   #상호 작용 후 검색창 클릭
     search.click()                                                #검색한 element를 클릭한다
-
     search.send_keys(keyword)                                          #keyword를 검색창에 전송한다
     search_button = browser.find_element(By.ID, 'btn_search_recruit')  #Enter키가 전송이 안되는 치명적 오류가 있어서 그냥 버튼누르는걸로 바꿨습니다..
     actions = ActionChains(browser)
     actions.move_to_element(search_button).click().perform()
-
-       
     wait = WebDriverWait(browser, 10)                              #10초간 기다린다. - 해당부분 로딩완료되는 시점까지만 wait 할수 있는지 궁금함 -jm
     element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')))  
     button = browser.find_element(By.XPATH, '//*[@id="content"]/ul[1]/li[2]/a')  
@@ -52,10 +49,8 @@ def worknet(url, word):
     element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')))
     button = browser.find_element(By.XPATH, '//*[@id="contents"]/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/a')
     button.click()
-
+    
     variable = browser.current_url
-
-    print(variable)
 
     return browser, variable
 

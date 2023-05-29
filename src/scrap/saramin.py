@@ -34,6 +34,7 @@ def scroll_down(browser):
 def extract_number(string): 
     return int(''.join(re.findall(r'\d+', string.replace(',', ''))))
 
+"#list_sort > div > div:nth-child(3) > span:nth-child(1)"
 def page_count(browser, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
     total_items = extract_number(total_items)
@@ -55,7 +56,6 @@ def get_items(page_index, url):
     new_url = url.replace("pageIndex=1", f"pageIndex={page_index}")
     browser.get(new_url)
     time.sleep(5)
-    
     scroll_down(browser)
 
     html = browser.page_source
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     variable = browser.current_url
     browser.close()
 
-    with multiprocessing.Pool(processes=8) as pool:  #너무 많이 돌리면 서버 부하가 심함
+    with multiprocessing.Pool(processes=4) as pool:  #너무 많이 돌리면 서버 부하가 심함
         pool.starmap(get_items, [(page, variable) for page in total_page])
 
     print("--- %s seconds ---" %(time.time() - start_time))
