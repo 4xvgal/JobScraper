@@ -21,7 +21,7 @@ def select_info(item, section):
 
 def page_count(broswer, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
-    total_items = int(total_items.replace(",",""))                       #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
+    total_items = int(total_items.replace(",",""))                     #1000 자리 넘어가면 문자열에 , 가 들어가면서 int 형 변환에러가 발생하므로 , 제거해 주는 코드 추가  -LGJ    23/05/17
     page_count = total_items // 10
     total_page = []
 
@@ -59,7 +59,7 @@ def get_items(page_index, url):
             salary = select_info(item,'.cp-info > p > span:nth-child(4)')
             locate = select_info(item,'.cp-info > p:nth-child(2) > span:nth-child(1)')
             title = select_info(item, 'div.link > a')
-            link = item.select_one('a').get('href')
+            link = 'https://www.work.go.kr' + item.select_one('a').get('href')
 
 
             csvWriter.writerow([title,name, carrer, form, salary, locate, link])
@@ -93,18 +93,18 @@ if __name__ == '__main__':
 
     print("test")
     # 멀티 프로세스 적용
-    pool = multiprocessing.Pool(processes=16)                             #8개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
+    pool = multiprocessing.Pool(processes=8)                             #8개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
     pool.starmap(get_items, [(page, variable) for page in total_page])   #get_items 함수 작업 요소를 전달합니다 , 전체 페이지 수 리스트와 현재 주소입니다.
     pool.close()                                                         # 테스트에 사용한 키워드는 '백엔드' 89개 회사 정보를 크롤링합니다. 기존 코드 30초에서 20초로 10 초 단축시켰습니다.
     pool.join()
                                 
 
-    filename = r'C:\CSV\data.csv'  # 기존의 CSV 파일 경로
+    filename = r'C:\CSV\data.csv'   # 기존의 CSV 파일 경로
     header = ['제목','회사명', '경력','고용형태', '급여', '근무지','링크']  # 추가할 헤더 정보
 
     # 기존 데이터 읽기
     data = []
-    with open(filename, 'r', newline='') as file:
+    with open(filename, 'r', encoding='utf-8',newline='') as file:
         reader = csv.reader(file)
         data = list(reader)
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
     # 수정된 데이터를 새로운 파일에 쓰기
     new_filename = r'C:\CSV\data1.csv'                       # 새로 생성될 파일 경로
-    with open(new_filename, 'w', newline='') as file:
+    with open(new_filename, 'w', encoding='utf-8',newline='') as file:
         writer = csv.writer(file)
         writer.writerows(data)
                                                             
