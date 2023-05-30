@@ -12,13 +12,17 @@ import time
 #사람인과 , 워크넷 크롤링을 각각 컨트롤하는 getinfo()
 #주의 : 현재 csv 파일은 워크넷과 사람인 각각 따로 생성하게 두었습니다.
 
-def select_info(item, section=None):                                                                  #select_info 함수 만드신거 여기 적용했습니다.
-    selected_element = item.select_one(section)
-
-    if selected_element is None:
+def select_info(item, section=None):
+    if section == None:
         return 'N/A'
     else:
-        return selected_element.get_text(strip=True)
+        selected_element = item.select_one(section)
+
+        if selected_element is None:
+            return 'N/A'
+        else:
+            return selected_element.get_text(strip=True).replace('\n','')                                                                  #select_info 함수 만드신거 여기 적용했습니다.
+    
 
 
 def get_info(page_index, url, route, veriable):
@@ -40,15 +44,16 @@ def get_info(page_index, url, route, veriable):
                 name = select_info(item,'div.area_corp > strong > a')                                        # select_info 함수 써서 더 간결하게 변햇습니다.
                 form = select_info(item, 'div.job_condition > span:nth-child(4)')
                 carrer = select_info(item, 'div.job_condition > span:nth-child(2)')
-                salary = select_info(item, 'div.job_condition > span:nth-child(3)')
+                education = select_info(item, 'div.job_condition > span:nth-child(3)')
+                salary = select_info(item, None)
                 locate = select_info(item, 'div.job_condition > span:nth-child(1)')
                 title = select_info(item, 'h2.job_tit')
                 link = "https://www.saramin.co.kr" + item.select_one('a').get('href')
 
-                csvWriter.writerow([title, name, carrer, form, salary, locate, link])
+                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
 
         filename = absolute_path
-        header = ['제목', '회사명', '경력', '고용형태', '급여', '근무지', '링크']
+        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
 
         data = []
         with open(filename, 'r', encoding='CP949', newline='', errors='ignore') as file:
@@ -79,15 +84,20 @@ def get_info(page_index, url, route, veriable):
             csvWriter = csv.writer(f)
 
             for item in items:
+                title = select_info(item, 'div.link > a')
                 name = select_info(item, 'div.txt > span')
                 form = select_info(item, '.cp-info > p > span:nth-child(1)')
                 carrer = select_info(item, '.cp-info > p > span:nth-child(2)')
                 salary = select_info(item, '.cp-info > p > span:nth-child(4)')
                 locate = select_info(item, '.cp-info > p:nth-child(2) > span:nth-child(1)')
-                csvWriter.writerow([name, carrer, form, salary, locate])
+                link = 'https://www.work.go.kr' + item.select_one('a').get('href')
+                education = select_info(item, '.cp-info > p > span:nth-child(3)')
+
+                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
+
 
         filename = absolute_path  # 기존의 CSV 파일 경로
-        header = ['제목','회사명', '경력','고용형태', '급여', '근무지']  # 추가할 헤더 정보
+        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
 
         # 기존 데이터 읽기
         data = []
