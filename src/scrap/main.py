@@ -13,7 +13,7 @@ if __name__ == '__main__':
     route = ["C:\CSV\saramin_data.csv" , "C:\CSV\worknet_data.csv"]
     keyword = input("입력하세요 : ")
 
-    pool = multiprocessing.Pool(processes=16)                            #16개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
+    pool = multiprocessing.Pool(processes=8)                            #16개 프로세스를 호출하였습니다.. 추가 할 수 있는데 컴퓨터 성능에 따라 달라집니다
     pool.starmap(start, [(address, route, keyword) for address in url])  #주소 , 경로 , 키워드를 준다.
     pool.close()                                                         # 테스트에 사용한 키워드는 '백엔드' 89개 회사 정보를 크롤링합니다. 기존 코드 30초에서 20초로 10 초 단축시켰습니다.
     pool.join()

@@ -37,13 +37,13 @@ def get_info(page_index, url, route, veriable):
             csvWriter = csv.writer(f)
 
             for item in items:                                                                          #가상 선택자 에러 계속 띄워서 다른걸로 바꾸엇습니다
-                name = select_info(item, 'div.company-name > a')                                        # select_info 함수 써서 더 간결하게 변햇습니다.
+                name = select_info(item,'div.area_corp > strong > a')                                        # select_info 함수 써서 더 간결하게 변햇습니다.
                 form = select_info(item, 'div.job_condition > span:nth-child(4)')
                 carrer = select_info(item, 'div.job_condition > span:nth-child(2)')
                 salary = select_info(item, 'div.job_condition > span:nth-child(3)')
                 locate = select_info(item, 'div.job_condition > span:nth-child(1)')
                 title = select_info(item, 'h2.job_tit')
-                link = item.select_one('a').get('href')
+                link = "https://www.saramin.co.kr" + item.select_one('a').get('href')
 
                 csvWriter.writerow([title, name, carrer, form, salary, locate, link])
 
@@ -84,7 +84,6 @@ def get_info(page_index, url, route, veriable):
                 carrer = select_info(item, '.cp-info > p > span:nth-child(2)')
                 salary = select_info(item, '.cp-info > p > span:nth-child(4)')
                 locate = select_info(item, '.cp-info > p:nth-child(2) > span:nth-child(1)')
-
                 csvWriter.writerow([name, carrer, form, salary, locate])
 
         filename = absolute_path  # 기존의 CSV 파일 경로

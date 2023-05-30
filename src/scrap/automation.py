@@ -11,7 +11,7 @@ def saramin(url, word):
 
     # 아래 옵션이 추가된 이유는 사람인이 headless로 실행되는 크롤러를 인식하고 실행을 막는 거 같아서 추가했더니 잘돌아갑니다 .. 참조: https://beomi.github.io/gb-crawling/posts/2017-09-28-HowToMakeWebCrawler-Headless-Chrome.html
     options = webdriver.ChromeOptions()
-    options.add_argument('headless')
+    #options.add_argument('headless')
     options.add_argument('window-size=1920x1080')
     options.add_argument("disable-gpu")
     options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
