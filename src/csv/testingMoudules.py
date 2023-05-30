@@ -8,4 +8,4 @@ import csvFunc as cf
 file_path = "src/csv/forTestFiles/data1.csv"
 export_path = "src/csv/forTestFiles/cleaned.csv"
 
-cf.csvEdit(file_path, export_path)
+cf.csvEdit(file_path, export_path,'cp949')
