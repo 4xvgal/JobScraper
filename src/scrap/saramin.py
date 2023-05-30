@@ -34,7 +34,6 @@ def scroll_down(browser):
 def extract_number(string): 
     return int(''.join(re.findall(r'\d+', string.replace(',', ''))))
 
-"#list_sort > div > div:nth-child(3) > span:nth-child(1)"
 def page_count(browser, section):
     total_items = browser.find_element(By.CSS_SELECTOR, section).text
     total_items = extract_number(total_items)
@@ -66,13 +65,13 @@ def get_items(page_index, url):
         csvWriter = csv.writer(f)
 
         for item in items:
-            name = select_info(item,'div.company-name > a')
+            name = select_info(item,'div.area_corp > strong > a')
             form = select_info(item,'div.job_condition > span::nth-child(4)')
             carrer = select_info(item,'div.job_condition > span::nth-child(2)')
             salary = select_info(item,)
             locate = select_info(item,'div.job_condition > span::nth-child(1)')
             title = select_info(item, 'h2.job_tit')
-            link = item.select_one('a').get('href')
+            link = 'https://www.saramin.co.kr' + item.select_one('a').get('href')
 
             csvWriter.writerow([title,name, carrer, form, salary, locate, link])
 
