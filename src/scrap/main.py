@@ -17,6 +17,3 @@ def run_crawling(keyword, processCount, SavingDir): #검색어, 멀티프로세�
     pool.join()
 
     print("--- %s seconds ---" % (time.time() - start_time))
-
-if __name__ == '__main__':
-    run_crawling()
