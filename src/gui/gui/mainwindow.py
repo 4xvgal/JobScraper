@@ -22,15 +22,13 @@ class CSVTableModel(QAbstractTableModel):
         return len(self.data)
 
     def columnCount(self, parent):
-        if self.data is not None:
-            return len(self.data.columns)
-        return 0
+        return len(self.data[0]) if self.data else 0
 
     def data(self, index, role):
         if role == Qt.ItemDataRole.DisplayRole:
             row = index.row()
             col = index.column()
-            return str(self.data.iloc[row, col])
+            return str(self.data[row][col])
         return None
 #주 윈도우 클래스
 class MainWindow(QMainWindow):
@@ -39,9 +37,9 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #검색버튼을 눌렀을때
+        #검색버튼을 클릭할때 함수 실행 
         self.ui.search_button.clicked.connect(self.initSearch)
-    #검색 버튼 클릭되었을때
+    #검색버튼 눌러질때 실횅되는 함수
     def initSearch(self):
         global filePath
         # Read CSV file and retrieve the data
