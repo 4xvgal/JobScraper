@@ -12,39 +12,41 @@ from PySide6.QtCore import Qt, QAbstractTableModel
 from ui_form import Ui_MainWindow
 filePath = "src/csv/forTestFiles/cleaned.csv"
 
-#CSV 데이터 저장형식 클래스
+# CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
     def __init__(self, data):
         super().__init__()
-        self.data = data
+        self.data_list = data
 
     def rowCount(self, parent):
-        return len(self.data)
+        return len(self.data_list)
 
     def columnCount(self, parent):
-        return len(self.data[0]) if self.data else 0
+        return len(self.data_list[0]) if self.data_list else 0
 
     def data(self, index, role):
         if role == Qt.ItemDataRole.DisplayRole:
             row = index.row()
             col = index.column()
-            return str(self.data[row][col])
+            return str(self.data_list[row][col])
         return None
-#주 윈도우 클래스
+
+# 주 윈도우 클래스
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #검색버튼을 클릭할때 함수 실행 
+        # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
-    #검색버튼 눌러질때 실횅되는 함수
+
+    # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         global filePath
         # Read CSV file and retrieve the data
         data = []
-        with open(filePath, 'r',encoding='UTF-8') as file:
+        with open(filePath, 'r', encoding='UTF-8') as file:
             csv_reader = csv.reader(file)
             for row in csv_reader:
                 data.append(row)
@@ -52,7 +54,8 @@ class MainWindow(QMainWindow):
         # Create a model and set it to the table view
         model = CSVTableModel(data)
         self.ui.ShowingCSV.setModel(model)
-#실행부분
+
+# 실행부분
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = MainWindow()
