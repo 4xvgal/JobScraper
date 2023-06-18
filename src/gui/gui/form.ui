@@ -48,6 +48,16 @@
      <attribute name="title">
       <string>ListViewer</string>
      </attribute>
+     <widget class="QTableView" name="ShowingCSV">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>711</width>
+        <height>391</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Statics">
      <attribute name="title">
@@ -214,22 +224,6 @@
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>메뉴</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
