@@ -40,13 +40,14 @@ class MainWindow(QMainWindow):
 
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
-
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         global filePath
+
+        
         # Read CSV file and retrieve the data
         data = []
-        with open(filePath, 'r', encoding='UTF-8') as file:
+        with open(filePath, 'r', encoding='cp949') as file:
             csv_reader = csv.reader(file)
             for row in csv_reader:
                 data.append(row)

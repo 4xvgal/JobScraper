@@ -6,7 +6,7 @@ import time
 import multiprocessing
 
 
-def run_crawling(keyword, processCount, SavingDir): #검색어, 멀티프로세서 수, 저장경로
+def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     start_time = time.time()
     url = ["https://www.saramin.co.kr/", "https://www.work.go.kr"]
     route = ["C:\CSV\saramin_data.csv", "C:\CSV\worknet_data.csv"]
