@@ -5,6 +5,10 @@ import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 
+
+#다른 코드들 import
+
+from scrap import main
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
