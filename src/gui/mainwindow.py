@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: utf-8
-import sys
+import sys, os
 import csv
 import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -7,8 +7,9 @@ from PySide6.QtCore import Qt, QAbstractTableModel
 
 
 #다른 코드들 import
-
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap import main
+
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
@@ -47,8 +48,8 @@ class MainWindow(QMainWindow):
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         global filePath
-
-        
+        keyword = self.ui.search_keyword.toPlainText() # search_keyword 오브젝트에서 값 가져오기
+        print(keyword)
         # Read CSV file and retrieve the data
         data = []
         with open(filePath, 'r', encoding='cp949') as file:

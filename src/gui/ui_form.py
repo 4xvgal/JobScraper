@@ -59,10 +59,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.label_2)
 
-        self.textEdit = QTextEdit(self.horizontalLayoutWidget)
-        self.textEdit.setObjectName(u"textEdit")
+        self.search_keyword = QTextEdit(self.horizontalLayoutWidget)
+        self.search_keyword.setObjectName(u"search_keyword")
 
-        self.horizontalLayout.addWidget(self.textEdit)
+        self.horizontalLayout.addWidget(self.search_keyword)
 
         self.pushButton = QPushButton(self.horizontalLayoutWidget)
         self.pushButton.setObjectName(u"pushButton")
