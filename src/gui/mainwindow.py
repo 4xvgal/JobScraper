@@ -6,14 +6,14 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 
 
-#import anotehr folder
+#다른 코드들 import
 
-
-import sys, os
-
+import sys
+import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from scrap import scrap_init
+from scrap.scrap_init import run_crawling
+run_crawling()
 
 
 # Important:
