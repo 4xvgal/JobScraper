@@ -21,7 +21,7 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     pool.close()
     pool.join()
 
-    print("--- %s seconds ---" % (time.time() - start_time))
+   #print("--- %s seconds ---" % (time.time() - start_time))
 
 
-#run_crawling("파이썬", 8)
+#run_crawling("파이썬", 1)

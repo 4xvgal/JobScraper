@@ -1,7 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import sys, os
 import csv
-import pandas as pd
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 
@@ -11,17 +10,15 @@ from PySide6.QtCore import Qt, QAbstractTableModel
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 from scrap.scrap_init import run_crawling
-run_crawling()
 
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
-from ui_form import Ui_MainWindow
-filePath = "src/csv/forTestFiles/cleaned.csv"
+from gui.ui_form import Ui_MainWindow
+filePath = "src/csvEdit/forTestFiles/cleaned.csv"
 
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
@@ -54,9 +51,17 @@ class MainWindow(QMainWindow):
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         #키워드 전달하기
-        keyword = self.ui.search_keyword.toPlainText() # search_keyword 오브젝트에서 값 가져오기
-        print(keyword)
-        # Read CSV file and retrieve the data
+        processCount = int(self.ui.multiProcess.currentText()) #multiProcess 콤보박스 오브젝트에서 값 가져오기
+        keyword = self.ui.search_keyword_lineEdit.text() # search_keyword_lineedit 오브젝트에서 값 가져오기
+        
+        # 키워드 잘 가져오는지 디버깅용 출력
+        print(keyword, processCount)
+        
+
+        #크롤러 실행
+        run_crawling(keyword, processCount)
+
+        # Read CSV file and retrieve the data (csv 출력 테스트용)
         data = []
         with open(filePath, 'r', encoding='cp949') as file:
             csv_reader = csv.reader(file)
@@ -67,9 +72,16 @@ class MainWindow(QMainWindow):
         model = CSVTableModel(data)
         self.ui.ShowingCSV.setModel(model)
 
-# 실행부분
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    widget = MainWindow()
-    widget.show()
-    sys.exit(app.exec())
+#함수화
+
+def initGUI():
+    if __name__ == "__main__":
+        app = QApplication(sys.argv)
+        widget = MainWindow()
+        widget.show()
+        sys.exit(app.exec())
+    else:
+        app = QApplication(sys.argv)
+        widget = MainWindow()
+        widget.show()
+        sys.exit(app.exec())

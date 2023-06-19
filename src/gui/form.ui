@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>20</x>
       <y>80</y>
-      <width>731</width>
+      <width>1251</width>
       <height>441</height>
      </rect>
     </property>
@@ -33,9 +33,9 @@
      <widget class="QTableView" name="ShowingCSV">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>0</y>
-        <width>711</width>
+        <width>1241</width>
         <height>391</height>
        </rect>
       </property>
@@ -82,19 +82,19 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="search_keyword"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>검색결과 초기화</string>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="search_keyword_lineEdit"/>
      </item>
      <item>
       <widget class="QPushButton" name="search_button">
        <property name="text">
         <string>검색</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>검색결과 초기화</string>
        </property>
       </widget>
      </item>
@@ -111,10 +111,10 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="multiProcess">
        <item>
         <property name="text">
-         <string>8 (기본값)</string>
+         <string>8</string>
         </property>
        </item>
        <item>
@@ -150,11 +150,6 @@
        <item>
         <property name="text">
          <string>7</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>New Item</string>
         </property>
        </item>
       </widget>
