@@ -6,9 +6,15 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 
 
-#다른 코드들 import
+#import anotehr folder
+
+
+import sys, os
+
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from scrap import main
+
+from scrap import scrap_init
+
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -47,7 +53,7 @@ class MainWindow(QMainWindow):
         self.ui.search_button.clicked.connect(self.initSearch)
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
-        global filePath
+        #키워드 전달하기
         keyword = self.ui.search_keyword.toPlainText() # search_keyword 오브젝트에서 값 가져오기
         print(keyword)
         # Read CSV file and retrieve the data
