@@ -11,9 +11,12 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     url = ["https://www.saramin.co.kr/", "https://www.work.go.kr"]
     route = ["C:\CSV\saramin_data.csv", "C:\CSV\worknet_data.csv"]
 
-    pool = multiprocessing.Pool(processCount=8)
+    pool = multiprocessing.Pool(processCount)
     pool.starmap(start, [(address, route, keyword) for address in url])
     pool.close()
     pool.join()
 
     print("--- %s seconds ---" % (time.time() - start_time))
+
+
+#run_crawling("파이썬", 8)
