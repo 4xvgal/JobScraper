@@ -33,6 +33,10 @@ def get_info(page_index, url, route, veriable):
         items = soup.select("div.item_recruit")
         absolute_path = os.path.abspath(route[0])
 
+        # 처음 크롤링을 시작할 때 기존의 파일 삭제
+        if page_index == 1 and os.path.exists(absolute_path):
+            os.remove(absolute_path)
+
         with open(absolute_path, 'a', encoding='CP949', newline='', errors='ignore') as f:
             csvWriter = csv.writer(f)
 
@@ -74,7 +78,9 @@ def get_info(page_index, url, route, veriable):
         items = soup.select("li.cont-right")
         absolute_path = os.path.abspath(route[1])                                 # 절대경로 설정을 위한 os 모듈 사용 (워크넷의 경로는 route 리스트 형태로 인덱스 1번에 있습니다.)
 
-
+        # 처음 크롤링을 시작할 때 기존의 파일 삭제
+        if page_index == 1 and os.path.exists(absolute_path):
+            os.remove(absolute_path)
         with open(absolute_path, 'a', encoding='CP949', newline='', errors='ignore') as f:
             csvWriter = csv.writer(f)
 
