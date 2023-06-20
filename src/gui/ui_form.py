@@ -134,6 +134,6 @@ class Ui_MainWindow(object):
         self.multiProcess.setItemText(6, QCoreApplication.translate("MainWindow", u"6", None))
         self.multiProcess.setItemText(7, QCoreApplication.translate("MainWindow", u"7", None))
 
-        self.TimerView.setText("")
+        self.TimerView.setText(QCoreApplication.translate("MainWindow", u"tes", None))
     # retranslateUi
 
