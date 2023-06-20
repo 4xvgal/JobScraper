@@ -4,6 +4,8 @@ import csv
 from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
+from PySide6.QtCore import QTimer
+
 
 
 #다른 코드들 import
@@ -19,7 +21,7 @@ from scrap.scrap_init import run_crawling
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
-filePath = "src/csvEdit/forTestFiles/cleaned.csv"
+filePath = "C:\CSV\merged.csv"
 
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
@@ -66,17 +68,25 @@ class MainWindow(QMainWindow):
         #크롤러 실행
         self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
-        # # Read CSV file and retrieve the data (csv 출력 테스트용)
-        # data = []
-        # with open(filePath, 'r', encoding='cp949') as file:
-        #     csv_reader = csv.reader(file)
-        #     for row in csv_reader:
-        #         data.append(row)
+        # 크롤러가 끝나면?
+        self.ui.timer = QTimer()
+        self.ui.timer.timeout.connect(self.check_crawler_process)
+        self.ui.timer.start(1000)  # Check every second
 
-        # # Create a model and set it to the table view
-        # model = CSVTableModel(data)
-        # self.ui.ShowingCSV.setModel(model)
+    def check_crawler_process(self):
+        if not self.ui.crawler_process.is_alive():
+            # 프로세스 끝나면 csv
+            self.ui.timer.stop()
+            
+            data = []
+            with open(filePath, 'r', encoding='cp949') as file:
+                csv_reader = csv.reader(file)
 
+                for row in csv_reader:
+                    data.append(row)
+
+            model = CSVTableModel(data)
+            self.ui.ShowingCSV.setModel(model)
 #함수화
 
 def initGUI():
