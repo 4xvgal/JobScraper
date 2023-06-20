@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QHeaderView,
     QLabel, QLineEdit, QMainWindow, QPushButton,
     QSizePolicy, QStatusBar, QTabWidget, QTableView,
-    QWidget)
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -38,6 +38,12 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.ListViewer, "")
         self.Statics = QWidget()
         self.Statics.setObjectName(u"Statics")
+        self.verticalLayoutWidget = QWidget(self.Statics)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(30, 0, 1191, 80))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.tabWidget.addTab(self.Statics, "")
         self.horizontalLayoutWidget = QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
@@ -93,6 +99,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.multiProcess)
 
+        self.TimerView = QLabel(self.centralwidget)
+        self.TimerView.setObjectName(u"TimerView")
+        self.TimerView.setGeometry(QRect(810, 10, 134, 71))
+        self.TimerView.setFont(font)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -124,5 +134,6 @@ class Ui_MainWindow(object):
         self.multiProcess.setItemText(6, QCoreApplication.translate("MainWindow", u"6", None))
         self.multiProcess.setItemText(7, QCoreApplication.translate("MainWindow", u"7", None))
 
+        self.TimerView.setText("")
     # retranslateUi
 

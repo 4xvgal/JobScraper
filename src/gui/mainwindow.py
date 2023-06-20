@@ -68,9 +68,9 @@ class MainWindow(QMainWindow):
         self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
         # 크롤링 완료를 체크하는 타이머 시작
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.check_crawler_process)
-        self.timer.start(1000)  # 매 1초마다 check_crawler_process 호출
+        self.ui.TimerView = QTimer()
+        self.ui.TimerView.timeout.connect(self.check_crawler_process)
+        self.ui.TimerView.start(1000)  # 매 1초마다 check_crawler_process 호출
 
 
         # # Read CSV file and retrieve the data (csv 출력 테스트용)
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
         # self.ui.ShowingCSV.setModel(model)
     def check_crawler_process(self):
         if not self.crawler_process.is_alive():  # 크롤링 프로세스가 종료되었는지 확인
-            self.timer.stop()  # 타이머를 멈춤
+            self.ui.TimerView.stop()  # 타이머를 멈춤
 
 #함수화
 
