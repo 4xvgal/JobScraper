@@ -1,12 +1,10 @@
 # This Python file uses the following encoding: utf-8
 import sys, os
 import csv
-import time
 from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
-
 
 
 
@@ -25,13 +23,11 @@ from scrap.scrap_init import run_crawling
 from gui.ui_form import Ui_MainWindow
 filePath = "C:\CSV\merged.csv"
 
-
-
-#크롤링 실행 함수
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
     return crawler_process
+
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
     def __init__(self, data):
@@ -68,17 +64,20 @@ class MainWindow(QMainWindow):
         
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
-
+        
         #크롤러 실행
         self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
         # 크롤러가 끝나면?
-        self.ui.timer = QTimer()
-        self.ui.timer.timeout.connect(self.check_crawler_process)
-        self.ui.timer.start(1000)  # Check every second
+        self.ui.timer = QTimer() #<== QTimer 클래스의 객체 self.ui.timer
+        self.ui.timer.timeout.connect(self.check_crawler_process) # <== timer 의 설정된 시간 (1000밀리초) 마다 timeout 되어 self.check_crawler_process 객체를 실행  
+        self.ui.timer.start(1000)  # 타임아웃 간격 설정
 
     def check_crawler_process(self):
-        if not self.ui.crawler_process.is_alive():
+        
+        # is_alive() 는 mutliprocess.process 클래스의 메서드입니다.
+
+        if not self.ui.crawler_process.is_alive(): #<== self.ui.crawler_process 프로세스가 실행 중이 아닐 때
             # 프로세스 끝나면 csv
             self.ui.timer.stop()
             
@@ -92,6 +91,7 @@ class MainWindow(QMainWindow):
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
 #함수화
+
 def initGUI():
     if __name__ == "__main__":
         app = QApplication(sys.argv)
@@ -103,4 +103,3 @@ def initGUI():
         widget = MainWindow()
         widget.show()
         sys.exit(app.exec())
-
