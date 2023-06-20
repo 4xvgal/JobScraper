@@ -54,13 +54,11 @@ def get_info(page_index, url, route, veriable):
                 education = select_info(item, 'div.job_condition > span:nth-child(3)')
                 salary = select_info(item, None)
                 locate = select_info(item, 'div.job_condition > span:nth-child(1)')
-                title = select_info(item, 'h2.job_tit')
-                link = "https://www.saramin.co.kr" + item.select_one('a').get('href')
 
-                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
+                csvWriter.writerow([name, carrer, education,form, salary, locate])
 
         filename = absolute_path
-        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
+        header = ['회사명', '경력','학력', '고용형태', '급여', '근무지']
 
         data = []
         with open(filename, 'r', encoding='CP949', newline='', errors='ignore') as file:
@@ -93,20 +91,18 @@ def get_info(page_index, url, route, veriable):
             csvWriter = csv.writer(f)
 
             for item in items:
-                title = select_info(item, 'div.link > a')
                 name = select_info(item, 'div.txt > span')
                 form = select_info(item, '.cp-info > p > span:nth-child(1)')
                 carrer = select_info(item, '.cp-info > p > span:nth-child(2)')
                 salary = select_info(item, '.cp-info > p > span:nth-child(4)')
                 locate = select_info(item, '.cp-info > p:nth-child(2) > span:nth-child(1)')
-                link = 'https://www.work.go.kr' + item.select_one('a').get('href')
                 education = select_info(item, '.cp-info > p > span:nth-child(3)')
 
-                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
+                csvWriter.writerow([ name, carrer, education,form, salary, locate])
 
 
         filename = absolute_path  # 기존의 CSV 파일 경로
-        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
+        header = ['회사명', '경력','학력', '고용형태', '급여', '근무지']
 
         # 기존 데이터 읽기
         data = []

@@ -28,43 +28,35 @@ def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸�
     return edited_rows
 
 def locationConv(reader):#'근무지' 열에서 필요없는 문구를 삭제합니다.
-    #시도 리스트
     spc_district = ["서울특별시", "인천광역시", "대전광역시", "대구광역시", "울산광역시", "부산광역시", "광주광역시", "세종특별자치시"]
     spc_short = ['서울', '인천', '대전', '대구', '울산', '부산', '광주', '세종']
     do_district = ["경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"]
-    #짧은것을 길게 만들기위한 딕셔너리
     spc_short_dict = dict(zip(spc_short, spc_district))
-
-    #행 데이터 초기화
+    spc_short_dict.update({
+    '경남': '경상남도','경기': '경기도', '경북': '경상북도','전남': '전라남도' ,'전북': '전라북도', '충남':'충청남도', '충북':'충천북도'
+    })
+    #짧은것을 길게 만들기위한 딕셔너리
+    
     rows = list(reader)
+
 
     #각 행의 근무지 데이터를 수정합니다.
     for row in rows:
         location = row['근무지']
         #짧은 표현을 긴 표현으로 변경
-        if any(short in location for short in spc_short):
-            rfmdLocation = location
-            for short, district in spc_short_dict.items():
-                rfmdLocation = rfmdLocation.replace(short, district)
-        
-        #'근무지' 삭제
-        #if '근무지' in location:
-            #rfmdLocation = location.replace('근무지', '')
+        for short, full in spc_short_dict.items():
+            location = re.sub(short, full, location)
 
-        #시도 리스트에 해당되지 않는 모든 문자 삭제
         rfmdLocation = remove_non_list_strings(location, spc_district + do_district)
-
-        #수정된 근무지 값을 업데이트 합니다.
         row['근무지'] = rfmdLocation
 
     #수정된 데이터 반환
     # Extracting column names from the first row
     fieldnames = list(rows[0].keys())
-
-    # Creating a list of edited rows with all columns
     edited_rows = [fieldnames] + [list(row.values()) for row in rows]
 
     return edited_rows
+
 
 # 데이터를 이중으로 포함하고있는 연봉데이터를 최소 최대값으로 분리하여 새로운 열에 저장합니다.
 def addMaxMinRow(reader):
@@ -141,10 +133,14 @@ def strYearEdit(strData):
     return str(reformedStr)
         
 #문자열에서 리스트에 있지 않는 모든 문자를 제거 합니다.
-def remove_non_list_strings(string, allowed_strings):
-        filtered_string = ' '.join(word for word in string.split() if word in allowed_strings)
-        return filtered_string
-
+def remove_non_list_strings(string, list_):
+    if any(substring in string for substring in list_):
+        for item in list_:
+            if item in string:
+                return item
+    else:
+        return string
+    
 #문자열에서 숫자와 리스트에 지정되지 않는 모든 문자를 삭제합니다.
 def removeNonListedNonDigit(data, listed=['']):
     """
