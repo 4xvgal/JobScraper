@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(20, 80, 1251, 441))
+        self.tabWidget.setGeometry(QRect(20, 80, 1251, 591))
         self.ListViewer = QWidget()
         self.ListViewer.setObjectName(u"ListViewer")
         self.ShowingCSV = QTableView(self.ListViewer)
@@ -40,10 +40,16 @@ class Ui_MainWindow(object):
         self.Statics.setObjectName(u"Statics")
         self.verticalLayoutWidget = QWidget(self.Statics)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(30, 0, 1191, 80))
+        self.verticalLayoutWidget.setGeometry(QRect(10, 59, 1221, 491))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayoutWidget_2 = QWidget(self.Statics)
+        self.verticalLayoutWidget_2.setObjectName(u"verticalLayoutWidget_2")
+        self.verticalLayoutWidget_2.setGeometry(QRect(10, 10, 1221, 41))
+        self.verticalLayout_2 = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.tabWidget.addTab(self.Statics, "")
         self.horizontalLayoutWidget = QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
@@ -99,10 +105,18 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.multiProcess)
 
-        self.TimerView = QLabel(self.centralwidget)
+        self.verticalLayoutWidget_3 = QWidget(self.centralwidget)
+        self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
+        self.verticalLayoutWidget_3.setGeometry(QRect(810, 0, 160, 80))
+        self.verticalLayout_3 = QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.TimerView = QLabel(self.verticalLayoutWidget_3)
         self.TimerView.setObjectName(u"TimerView")
-        self.TimerView.setGeometry(QRect(810, 10, 134, 71))
         self.TimerView.setFont(font)
+
+        self.verticalLayout_3.addWidget(self.TimerView)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -110,7 +124,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -134,6 +148,6 @@ class Ui_MainWindow(object):
         self.multiProcess.setItemText(6, QCoreApplication.translate("MainWindow", u"6", None))
         self.multiProcess.setItemText(7, QCoreApplication.translate("MainWindow", u"7", None))
 
-        self.TimerView.setText(QCoreApplication.translate("MainWindow", u"tes", None))
+        self.TimerView.setText("")
     # retranslateUi
 
