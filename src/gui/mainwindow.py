@@ -1,9 +1,10 @@
 # This Python file uses the following encoding: utf-8
 import sys, os
 import csv
+import time
 from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import Qt, QAbstractTableModel
+from PySide6.QtCore import Qt, QAbstractTableModel,QTimer
 
 
 #다른 코드들 import
@@ -64,18 +65,27 @@ class MainWindow(QMainWindow):
         print(keyword, processCount)
         
         #크롤러 실행
-        self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
+        self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
+
+        # 크롤링 완료를 체크하는 타이머 시작
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.check_crawler_process)
+        self.timer.start(1000)  # 매 1초마다 check_crawler_process 호출
+
 
         # # Read CSV file and retrieve the data (csv 출력 테스트용)
         # data = []
         # with open(filePath, 'r', encoding='cp949') as file:
         #     csv_reader = csv.reader(file)
         #     for row in csv_reader:
-        #         data.append(row)
+        #         data.append(row)  
 
         # # Create a model and set it to the table view
         # model = CSVTableModel(data)
         # self.ui.ShowingCSV.setModel(model)
+    def check_crawler_process(self):
+        if not self.crawler_process.is_alive():  # 크롤링 프로세스가 종료되었는지 확인
+            self.timer.stop()  # 타이머를 멈춤
 
 #함수화
 
