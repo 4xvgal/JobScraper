@@ -64,7 +64,7 @@ class MainWindow(QMainWindow):
         print(keyword, processCount)
         
         #크롤러 실행
-        self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
+        self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
         # # Read CSV file and retrieve the data (csv 출력 테스트용)
         # data = []
