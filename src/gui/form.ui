@@ -20,11 +20,11 @@
       <x>20</x>
       <y>80</y>
       <width>1251</width>
-      <height>441</height>
+      <height>591</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="ListViewer">
      <attribute name="title">
@@ -45,6 +45,28 @@
      <attribute name="title">
       <string>통계치보기</string>
      </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>59</y>
+        <width>1221</width>
+        <height>491</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout"/>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>1221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -152,6 +174,30 @@
          <string>7</string>
         </property>
        </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>0</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="TimerView">
+       <property name="font">
+        <font>
+         <family>Nanum Gothic</family>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
       </widget>
      </item>
     </layout>

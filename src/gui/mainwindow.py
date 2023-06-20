@@ -1,10 +1,12 @@
 # This Python file uses the following encoding: utf-8
 import sys, os
 import csv
+import time
 from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
+
 
 
 
@@ -23,11 +25,13 @@ from scrap.scrap_init import run_crawling
 from gui.ui_form import Ui_MainWindow
 filePath = "C:\CSV\merged.csv"
 
+
+
+#크롤링 실행 함수
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
     return crawler_process
-
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
     def __init__(self, data):
@@ -64,7 +68,7 @@ class MainWindow(QMainWindow):
         
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
-        
+
         #크롤러 실행
         self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
@@ -88,7 +92,6 @@ class MainWindow(QMainWindow):
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
 #함수화
-
 def initGUI():
     if __name__ == "__main__":
         app = QApplication(sys.argv)
@@ -100,3 +103,4 @@ def initGUI():
         widget = MainWindow()
         widget.show()
         sys.exit(app.exec())
+
