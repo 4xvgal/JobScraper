@@ -20,13 +20,13 @@ from scrap.scrap_init import run_crawling
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
-filePath = "src/csvEdit/forTestFiles/cleaned.csv"
 
+
+#크롤링 실행 함수
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
     return crawler_process
-
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
     def __init__(self, data):
@@ -64,13 +64,16 @@ class MainWindow(QMainWindow):
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
         
-        #크롤러 실행
+        # 크롤러 실행
         self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
-
+        self.crawling = True  # 크롤링 상태를 저장하는 변수
         # 크롤링 완료를 체크하는 타이머 시작
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_crawler_process)
         self.timer.start(1000)  # 매 1초마다 check_crawler_process 호출
+
+        # 타이머 시작 메시지 표시
+        self.ui.TimerView.setText("Crawling Started")
 
 
         # # Read CSV file and retrieve the data (csv 출력 테스트용)
@@ -83,11 +86,15 @@ class MainWindow(QMainWindow):
         # # Create a model and set it to the table view
         # model = CSVTableModel(data)
         # self.ui.ShowingCSV.setModel(model)
+    #크롤링 확인 함수
     def check_crawler_process(self):
-        if not self.crawler_process.is_alive():  # 크롤링 프로세스가 종료되었는지 확인
+        if self.timer.isActive() and not self.crawler_process.is_alive():  # 크롤링이 진행 중이고 프로세스가 종료되었다면
+            self.crawling = False  # 크롤링 상태를 False로 설정
             self.timer.stop()  # 타이머를 멈춤
+            self.ui.TimerView.setText("Crawling Finished")
+            return False
+        
 #함수화
-
 def initGUI():
     if __name__ == "__main__":
         app = QApplication(sys.argv)
@@ -99,3 +106,4 @@ def initGUI():
         widget = MainWindow()
         widget.show()
         sys.exit(app.exec())
+
