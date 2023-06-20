@@ -40,8 +40,6 @@ def get_info(page_index, url, route, veriable):
         # 처음 크롤링을 시작할 때 기존의 파일 삭제
         if page_index == 1 and os.path.exists(absolute_path):
             os.remove(absolute_path)
-            if os.path.abspath('C://CSV/merged.csv'):
-                os.remove('C://CSV/merged.csv')
                 
 
         with open(absolute_path, 'a', encoding='CP949', newline='', errors='ignore') as f:

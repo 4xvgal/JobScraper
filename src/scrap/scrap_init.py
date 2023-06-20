@@ -23,7 +23,8 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     pool.starmap(start, [(address, route, keyword) for address in url])
     pool.close()
     pool.join()
-
+    if merged:
+        os.remove(merged)
     absorption(final_route , merged)
 
     
