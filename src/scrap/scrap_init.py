@@ -3,9 +3,8 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from startfunction import start
-
+from absorption_csv import absorption
 import time
 import multiprocessing
 
@@ -13,13 +12,21 @@ import multiprocessing
 
 def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     start_time = time.time()
+    
     url = ["https://www.saramin.co.kr/", "https://www.work.go.kr"]
     route = ["C:\CSV\saramin_data.csv", "C:\CSV\worknet_data.csv"]
+    
+    final_route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
+    merged = "C:\CSV\merged.csv"
 
     pool = multiprocessing.Pool(processCount)
     pool.starmap(start, [(address, route, keyword) for address in url])
     pool.close()
     pool.join()
+
+    absorption(final_route , merged)
+
+    
 
    #print("--- %s seconds ---" % (time.time() - start_time))
 
