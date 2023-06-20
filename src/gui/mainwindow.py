@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys, os
 import csv
+from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 
@@ -19,6 +20,11 @@ from scrap.scrap_init import run_crawling
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
 filePath = "src/csvEdit/forTestFiles/cleaned.csv"
+
+def run_crawler_in_separate_process(keyword, processCount):
+    crawler_process = Process(target=run_crawling, args=(keyword, processCount))
+    crawler_process.start()
+    return crawler_process
 
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
@@ -57,20 +63,19 @@ class MainWindow(QMainWindow):
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
         
-
         #크롤러 실행
-        run_crawling(keyword, processCount)
+        self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
-        # Read CSV file and retrieve the data (csv 출력 테스트용)
-        data = []
-        with open(filePath, 'r', encoding='cp949') as file:
-            csv_reader = csv.reader(file)
-            for row in csv_reader:
-                data.append(row)
+        # # Read CSV file and retrieve the data (csv 출력 테스트용)
+        # data = []
+        # with open(filePath, 'r', encoding='cp949') as file:
+        #     csv_reader = csv.reader(file)
+        #     for row in csv_reader:
+        #         data.append(row)
 
-        # Create a model and set it to the table view
-        model = CSVTableModel(data)
-        self.ui.ShowingCSV.setModel(model)
+        # # Create a model and set it to the table view
+        # model = CSVTableModel(data)
+        # self.ui.ShowingCSV.setModel(model)
 
 #함수화
 
