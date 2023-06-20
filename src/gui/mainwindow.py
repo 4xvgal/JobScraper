@@ -4,7 +4,10 @@ import csv
 import time
 from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import Qt, QAbstractTableModel,QTimer
+from PySide6.QtCore import Qt, QAbstractTableModel
+from PySide6.QtCore import QTimer
+
+
 
 
 #다른 코드들 import
@@ -20,6 +23,8 @@ from scrap.scrap_init import run_crawling
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
+filePath = "C:\CSV\merged.csv"
+
 
 
 #크롤링 실행 함수
@@ -63,26 +68,29 @@ class MainWindow(QMainWindow):
         
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
-        
-        # 크롤러 실행
-        self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
-        self.crawling = True  # 크롤링 상태를 저장하는 변수
-        # 크롤링 완료를 체크하는 타이머 시작
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.check_crawler_process)
-        self.timer.start(1000)  # 매 1초마다 check_crawler_process 호출
 
-        # 타이머 시작 메시지 표시
-        self.ui.TimerView.setText("Crawling Started")
+        #크롤러 실행
+        self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
-    #크롤링 확인 함수
+        # 크롤러가 끝나면?
+        self.ui.timer = QTimer()
+        self.ui.timer.timeout.connect(self.check_crawler_process)
+        self.ui.timer.start(1000)  # Check every second
+
     def check_crawler_process(self):
-        if self.timer.isActive() and not self.crawler_process.is_alive():  # 크롤링이 진행 중이고 프로세스가 종료되었다면
-            self.crawling = False  # 크롤링 상태를 False로 설정
-            self.timer.stop()  # 타이머를 멈춤
-            self.ui.TimerView.setText("Crawling Finished")
-            return False
-        
+        if not self.ui.crawler_process.is_alive():
+            # 프로세스 끝나면 csv
+            self.ui.timer.stop()
+            
+            data = []
+            with open(filePath, 'r', encoding='cp949') as file:
+                csv_reader = csv.reader(file)
+
+                for row in csv_reader:
+                    data.append(row)
+
+            model = CSVTableModel(data)
+            self.ui.ShowingCSV.setModel(model)
 #함수화
 def initGUI():
     if __name__ == "__main__":
