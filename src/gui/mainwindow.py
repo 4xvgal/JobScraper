@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
         print(keyword, processCount)
         
         #크롤러 실행
-        self.crawler_process = run_crawler_in_separate_process(keyword, processCount)
+        self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
         # 크롤링 완료를 체크하는 타이머 시작
         self.ui.TimerView = QTimer()
@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
     def check_crawler_process(self):
         if not self.crawler_process.is_alive():  # 크롤링 프로세스가 종료되었는지 확인
             self.ui.TimerView.stop()  # 타이머를 멈춤
-
+            print("timer stop")
 #함수화
 
 def initGUI():
