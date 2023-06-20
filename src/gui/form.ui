@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="ListViewer">
      <attribute name="title">
@@ -36,7 +36,7 @@
         <x>0</x>
         <y>0</y>
         <width>1241</width>
-        <height>391</height>
+        <height>551</height>
        </rect>
       </property>
      </widget>

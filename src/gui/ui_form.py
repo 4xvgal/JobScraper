@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         self.ListViewer.setObjectName(u"ListViewer")
         self.ShowingCSV = QTableView(self.ListViewer)
         self.ShowingCSV.setObjectName(u"ShowingCSV")
-        self.ShowingCSV.setGeometry(QRect(0, 0, 1241, 391))
+        self.ShowingCSV.setGeometry(QRect(0, 0, 1241, 551))
         self.tabWidget.addTab(self.ListViewer, "")
         self.Statics = QWidget()
         self.Statics.setObjectName(u"Statics")
@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
