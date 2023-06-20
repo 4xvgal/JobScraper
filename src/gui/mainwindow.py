@@ -75,17 +75,6 @@ class MainWindow(QMainWindow):
         # 타이머 시작 메시지 표시
         self.ui.TimerView.setText("Crawling Started")
 
-
-        # # Read CSV file and retrieve the data (csv 출력 테스트용)
-        # data = []
-        # with open(filePath, 'r', encoding='cp949') as file:
-        #     csv_reader = csv.reader(file)
-        #     for row in csv_reader:
-        #         data.append(row)  
-
-        # # Create a model and set it to the table view
-        # model = CSVTableModel(data)
-        # self.ui.ShowingCSV.setModel(model)
     #크롤링 확인 함수
     def check_crawler_process(self):
         if self.timer.isActive() and not self.crawler_process.is_alive():  # 크롤링이 진행 중이고 프로세스가 종료되었다면
