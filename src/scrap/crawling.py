@@ -1,6 +1,7 @@
 #데이터를 크롤링하는 함수입니다.
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 import requests
 import csv
@@ -37,6 +38,13 @@ def get_info(page_index, url, route, veriable):
         items = soup.select("div.item_recruit")
         absolute_path = os.path.abspath(route[0])
 
+        # 처음 크롤링을 시작할 때 기존의 파일 삭제
+        if page_index == 1 and os.path.exists(absolute_path):
+            os.remove(absolute_path)
+            if os.path.abspath('C://CSV/merged.csv'):
+                os.remove('C://CSV/merged.csv')
+                
+
         with open(absolute_path, 'a', encoding='CP949', newline='', errors='ignore') as f:
             csvWriter = csv.writer(f)
 
@@ -47,13 +55,12 @@ def get_info(page_index, url, route, veriable):
                 education = select_info(item, 'div.job_condition > span:nth-child(3)')
                 salary = select_info(item, None)
                 locate = select_info(item, 'div.job_condition > span:nth-child(1)')
-                title = select_info(item, 'h2.job_tit')
-                link = "https://www.saramin.co.kr" + item.select_one('a').get('href')
+                locate = locate.replace("근무지", "")   
 
-                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
+                csvWriter.writerow([name, carrer, education,form, salary, locate])
 
         filename = absolute_path
-        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
+        header = ['회사명', '경력','학력', '고용형태', '급여', '근무지']
 
         data = []
         with open(filename, 'r', encoding='CP949', newline='', errors='ignore') as file:
@@ -79,25 +86,26 @@ def get_info(page_index, url, route, veriable):
         items = soup.select("li.cont-right")
         absolute_path = os.path.abspath(route[1])                                 # 절대경로 설정을 위한 os 모듈 사용 (워크넷의 경로는 route 리스트 형태로 인덱스 1번에 있습니다.)
 
-
+        # 처음 크롤링을 시작할 때 기존의 파일 삭제
+        if page_index == 1 and os.path.exists(absolute_path):
+            os.remove(absolute_path)
         with open(absolute_path, 'a', encoding='CP949', newline='', errors='ignore') as f:
             csvWriter = csv.writer(f)
 
             for item in items:
-                title = select_info(item, 'div.link > a')
                 name = select_info(item, 'div.txt > span')
                 form = select_info(item, '.cp-info > p > span:nth-child(1)')
                 carrer = select_info(item, '.cp-info > p > span:nth-child(2)')
                 salary = select_info(item, '.cp-info > p > span:nth-child(4)')
                 locate = select_info(item, '.cp-info > p:nth-child(2) > span:nth-child(1)')
-                link = 'https://www.work.go.kr' + item.select_one('a').get('href')
+                locate = locate.replace("근무지", "")
                 education = select_info(item, '.cp-info > p > span:nth-child(3)')
 
-                csvWriter.writerow([title, name, carrer, education,form, salary, locate, link])
+                csvWriter.writerow([name, carrer, education,form, salary, locate])
 
 
         filename = absolute_path  # 기존의 CSV 파일 경로
-        header = ['제목', '회사명', '경력','학력', '고용형태', '급여', '근무지', '링크']
+        header = [ '회사명', '경력','학력', '고용형태', '급여', '근무지']
 
         # 기존 데이터 읽기
         data = []

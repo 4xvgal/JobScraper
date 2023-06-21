@@ -20,4 +20,3 @@ def start(url , route , keyword):
     #3.멀티스레드(크롤링 과 , csv 작성)
     thread(total_page , url, veriable, route)
     
-
