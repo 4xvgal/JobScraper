@@ -7,8 +7,7 @@ import os
 
 def draw_graph(ax, canvas, cleand):
 
-    
-  
+
     font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()
     rc('font', family=font_name)
 

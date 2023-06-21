@@ -40,6 +40,7 @@ def run_crawler_in_separate_process(keyword, processCount):
     crawler_process.start()
     return crawler_process
 
+keyword = str(None)
 # CSV 데이터 저장형식 클래스
 class CSVTableModel(QAbstractTableModel):
     def __init__(self, data):
@@ -92,7 +93,6 @@ class MainWindow(QMainWindow):
         self.ui.timer.start(1000)  # 타임아웃 간격 설정
 
     def check_crawler_process(self):
-        
         # is_alive() 는 mutliprocess.process 클래스의 메서드입니다.
 
         if not self.ui.crawler_process.is_alive(): #<== self.ui.crawler_process 프로세스가 실행 중이 아닐 때
@@ -132,7 +132,7 @@ class MainWindow(QMainWindow):
         fig2, ax2 = plt.subplots()
         canvas2 = FigureCanvas(fig2)
         self.ui.graph_vertical_tap2.addWidget(canvas2)
-        c.draw_graph(ax2, canvas2, cleand)
+        c.draw_graph(ax2, canvas2, cleand, keyword)
 
         # 그래프 3
         fig3, ax3 = plt.subplots()
@@ -142,7 +142,6 @@ class MainWindow(QMainWindow):
         b.draw_graph(ax3, canvas3, cleand)
 
 #함수화
-
 def initGUI():
     if __name__ == "__main__":
         app = QApplication(sys.argv)
