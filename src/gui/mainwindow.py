@@ -117,11 +117,16 @@ class MainWindow(QMainWindow):
             self.initUI() 
 
     def initUI(self): #그래프 그리기
+
        # 그래프 1
-        fig1, ax1 = plt.subplots()
+        if plt.get_fignums():  # 활성화된 figure가 있으면
+            plt.figure().clear()  # 이전에 그려진 그래프를 지움
+
+        fig1, ax1 = plt.subplots() 
         canvas1 = FigureCanvas(fig1)
         self.ui.graph_vertical.addWidget(canvas1)
         his.draw_graph(ax1, canvas1, cleand)
+
 
         # 그래프 2
         fig2, ax2 = plt.subplots()
@@ -131,6 +136,7 @@ class MainWindow(QMainWindow):
 
         # 그래프 3
         fig3, ax3 = plt.subplots()
+        self.figure.clear()  
         canvas3 = FigureCanvas(fig3)
         self.ui.graph_vertical_tap3.addWidget(canvas3)
         b.draw_graph(ax3, canvas3, cleand)
