@@ -54,6 +54,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.graph_vertical = QVBoxLayout()
+        self.graph_vertical.setObjectName(u"graph_vertical")
+
+        self.verticalLayout_2.addLayout(self.graph_vertical)
+
         self.tab1_label1 = QLabel(self.verticalLayoutWidget_2)
         self.tab1_label1.setObjectName(u"tab1_label1")
 
@@ -179,8 +184,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.Tab4.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
+        self.Tab4.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
