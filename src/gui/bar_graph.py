@@ -3,8 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib import font_manager, rc
+import re
 
-def draw_graph(ax, canvas, cleand,keyword = "default"):
+def draw_graph(ax, canvas, cleand, keyword = "default"):
     "cleand 가 경로"
      
     font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()
@@ -13,11 +14,21 @@ def draw_graph(ax, canvas, cleand,keyword = "default"):
     # CSV 파일을 pandas 데이터프레임으로 읽어오기
     data = pd.read_csv(cleand, encoding='cp949')
 
-    # 경력 열에서 경력 값만 추출하여 리스트로 변환
-    careers = data['경력'].tolist()
+    # '경력' 열에서 경력 값만 추출하여 리스트로 변환
+    def convert_career(career):
+        # 정규 표현식을 사용하여 숫자를 추출
+        numbers = re.findall('\d+', career)
 
-    # 여기서 '경력' 데이터를 수치형으로 변환하는 작업이 필요할 것 같습니다.
-    # 이 부분은 데이터의 형식에 따라 적절히 처리해야 합니다.
+        if not numbers:  # 숫자 추출이 실패한 경우
+            return 0
+
+     # 숫자들 중 최솟값을 반환
+        numbers = list(map(int, numbers))
+        return min(numbers)
+
+    data['경력'] = data['경력'].apply(convert_career)
+    careers = data['경력'].tolist()
+    print(careers)
 
     # 경력 히스토그램 생성
     ax.hist(careers, bins=10, edgecolor='black')
