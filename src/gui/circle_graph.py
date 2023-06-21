@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib import font_manager, rc
 
-def draw_graph(ax, canvas, cleand):
+def draw_graph(ax, canvas, cleand, keyword = "default"):
     "cleand 가 경로"
     x = np.linspace(0, 10, 100)
     y = np.sin(x)
@@ -26,6 +26,6 @@ def draw_graph(ax, canvas, cleand):
     ax.pie(job_counts, labels=job_counts.index, autopct='%1.1f%%', startangle=90)
 
 # 그래프 스타일 설정
-    ax.set_title('상위 6개 지역의 일자리 분포')
+    ax.set_title(keyword + '상위 6개 지역의 일자리 분포')
     canvas.draw()
     
