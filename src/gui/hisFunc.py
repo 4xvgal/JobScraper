@@ -30,3 +30,4 @@ def draw_graph(ax, canvas, cleand, keyword="default"):
 
     # 그래프 표시
     canvas.draw()
+
