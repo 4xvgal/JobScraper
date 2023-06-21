@@ -5,7 +5,7 @@ from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
-
+from 
 
 
 #다른 코드들 import
