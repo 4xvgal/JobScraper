@@ -35,7 +35,7 @@ def draw_graph(ax, canvas, cleand, keyword = "default"):
 
     # 그래프 제목과 축 레이블 설정
     ax.set_title(keyword + '경력 히스토그램')
-    ax.set_xlabel('경력')
+    ax.set_xlabel('연차')
     ax.set_ylabel('빈도')
     
     canvas.draw()
