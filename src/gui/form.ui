@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="ListViewer">
      <attribute name="title">
@@ -58,7 +58,7 @@
        <item>
         <widget class="QTabWidget" name="Tab4">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_1">
           <attribute name="title">
@@ -74,6 +74,9 @@
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QVBoxLayout" name="graph_vertical"/>
+            </item>
             <item>
              <widget class="QLabel" name="tab1_label1">
               <property name="text">
