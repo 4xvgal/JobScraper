@@ -145,7 +145,7 @@ class MainWindow(QMainWindow):
         self.ui.graph_vertical_tap3.addWidget(canvas3)
         b.draw_graph(ax3, canvas3, cleand,keyword)
 
-
+#레이아웃 초기화
 def clearlayout(layout):
     for i in reversed(range(layout.count())):
         print(layout.itemAt(i))
@@ -188,8 +188,3 @@ def mergeCsvs(route, merged):
     merged_df.to_csv(merged, index=False, encoding='CP949')
     return int(0)
 
-
-#close_event() 함수
-
-def closeEvent(canvas):
-    canvas.close_event()
