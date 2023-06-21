@@ -14,5 +14,3 @@ def csvEdit(importPath, exportPath, env_encoder): #csvEdit은 입력경로와 �
         reader = csv.DictReader(file)
         cleaned_data = ce.addNewSalaries(reader) #연봉행 수정
         bf.save_to_csv(cleaned_data,exportPath,env_encoder,False)
-
-
