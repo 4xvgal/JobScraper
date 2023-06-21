@@ -11,6 +11,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap.scrap_init import run_crawling
+from csvEdit.csvFunc import csvEdit
 
 
 # Important:
@@ -77,7 +78,8 @@ class MainWindow(QMainWindow):
         if not self.ui.crawler_process.is_alive(): #<== self.ui.crawler_process 프로세스가 실행 중이 아닐 때
             # 프로세스 끝나면 csv
             self.ui.timer.stop()
-            
+            #CSV 재가공 코드
+            csvEdit(filePath,filePath,'cp949')
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)

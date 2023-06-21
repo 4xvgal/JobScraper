@@ -1,6 +1,7 @@
 import csv
 import re
-import basicFunc as bf
+from . import basicFunc as bf
+#import basicFunc as bf
 def changeMonthtoYear(start): #'연봉' 열에서 월급을 연봉으로 바꾸어줍니다. 매개변수는 csv.Reader 혹은 csv.DictReader로 저장한 변수입니다.
     rows = list(start)
     # 각 행의 연봉 데이터를 수정합니다.
