@@ -5,7 +5,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib import font_manager, rc
 import os
 
-def draw_graph(ax, canvas, cleand, keyword = "default"):
+def draw_graph(ax, canvas, cleand, keyword):
 
 
     font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()

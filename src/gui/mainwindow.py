@@ -135,14 +135,14 @@ class MainWindow(QMainWindow):
         fig2, ax2 = plt.subplots()
         canvas2 = FigureCanvas(fig2)
         self.ui.graph_vertical_tap2.addWidget(canvas2)
-        c.draw_graph(ax2, canvas2, cleand)
+        c.draw_graph(ax2, canvas2, cleand,keyword)
 
        
         # 그래프 3
         fig3, ax3 = plt.subplots()
         canvas3 = FigureCanvas(fig3)
         self.ui.graph_vertical_tap3.addwidget(canvas3)
-        b.draw_graph(ax3, canvas3, cleand)
+        b.draw_graph(ax3, canvas3, cleand,keyword)
 
 
 def clearlayout(layout):
