@@ -5,6 +5,6 @@ import csvEditors as ce
 import basicFunc as bf
 
 import csvFunc as cf
-file_path = "C:\CSV\merged.csv"
-export_path = "C:\CSV\merged.cleaned.csv"
+file_path = r"C:\CSV\merged.csv"
+export_path = r"C:\CSV\merged.cleaned.csv"
 cf.csvEdit(file_path, export_path,'cp949')

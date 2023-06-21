@@ -21,7 +21,7 @@ from scrap.scrap_init import run_crawling
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
-filePath = "C:\CSV\merged.csv"
+filePath = r"C:\CSV\merged.csv"
 
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))

@@ -6,4 +6,3 @@ if __name__ == '__main__':
     #GUI 실행
     initGUI()
 
-    

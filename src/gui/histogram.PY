@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
 
 def create_histogram(file_path):
-    font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+    font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()
     rc('font', family=font_name)
 
     # CSV 파일을 pandas DataFrame으로 읽어옵니다.
@@ -25,6 +25,6 @@ def create_histogram(file_path):
     plt.show()
 
 # 함수 호출 예시
-file_path = 'C:\CSV\cleaned.csv'
+file_path = r'C:\CSV\cleaned.csv'
 create_histogram(file_path)
 

@@ -18,7 +18,7 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     route = ["C:\CSV\saramin_data.csv", "C:\CSV\worknet_data.csv"]
     
     final_route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
-    merged = "C:\CSV\merged.csv"
+    merged = r"C:\CSV\merged.csv"
 
     if os.path.exists(merged): # 크롤링 실행 전에 파일 존재 유무를 검사해서 중복된 파일을 제거한다.
         Initialization(route, final_route, merged)
