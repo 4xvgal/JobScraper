@@ -5,10 +5,12 @@ from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
+
+#matplotlib 위한 import
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
-from . import histogram as his
+from . import hisFunc as his
 import pandas as pd
 #다른 코드들 import
 
