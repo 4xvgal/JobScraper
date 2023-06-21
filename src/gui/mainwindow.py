@@ -8,7 +8,7 @@ from PySide6.QtCore import QTimer
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
-from . import histogram as his
+from . import hisFunc as his
 import pandas as pd
 #다른 코드들 import
 
@@ -62,7 +62,8 @@ class MainWindow(QMainWindow):
         setStatusText(self,"Stanby")
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
-
+        # 검색결과 초기화 버튼 누를 때 함수 실행
+        self.ui.reset_button.clicked.connect(self.resetResult)
         #그래프 함수 호출
         self.initUI() 
 
@@ -86,6 +87,11 @@ class MainWindow(QMainWindow):
         self.ui.timer.timeout.connect(self.check_crawler_process) # <== timer 의 설정된 시간 (1000밀리초) 마다 timeout 되어 self.check_crawler_process 객체를 실행  
         self.ui.timer.start(1000)  # 타임아웃 간격 설정
 
+    #rst button clicked func (reset result)
+    def resetResult(self):
+        setStatusText(self,"Reset")
+        self.ui.ShowingCSV.setModel(None)
+        
     def check_crawler_process(self):
         
         # is_alive() 는 mutliprocess.process 클래스의 메서드입니다.
@@ -159,4 +165,4 @@ def mergeCsvs(route, merged):
 
 #set text
 def setStatusText(self, text):
-    self.ui.StatusView.setText(text)  
+    self.ui.StatusView.setText(text) 

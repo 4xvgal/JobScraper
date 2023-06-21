@@ -174,10 +174,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.search_button)
 
-        self.pushButton = QPushButton(self.horizontalLayoutWidget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.reset_button = QPushButton(self.horizontalLayoutWidget)
+        self.reset_button.setObjectName(u"reset_button")
 
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.horizontalLayout.addWidget(self.reset_button)
 
         self.label_3 = QLabel(self.horizontalLayoutWidget)
         self.label_3.setObjectName(u"label_3")
@@ -239,7 +239,7 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"\uad6c\uc778\uad6c\uc9c1 \uc815\ubcf4 \ud1b5\ud569 \uac80\uc0c9", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uc5b4 \uc785\ub825", None))
         self.search_button.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uacb0\uacfc \ucd08\uae30\ud654", None))
+        self.reset_button.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uacb0\uacfc \ucd08\uae30\ud654", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\uba40\ud2f0\ud504\ub85c\uc138\uc11c \uc218", None))
         self.multiProcess.setItemText(0, QCoreApplication.translate("MainWindow", u"8", None))
         self.multiProcess.setItemText(1, QCoreApplication.translate("MainWindow", u"1", None))
