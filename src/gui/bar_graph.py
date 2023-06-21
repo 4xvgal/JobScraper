@@ -11,7 +11,7 @@ def draw_graph(ax, canvas, cleand,keyword = "default"):
     rc('font', family=font_name)
 
 # CSV 파일을 pandas 데이터프레임으로 읽어오기
-    data = pd.read_csv(csv_file_path)
+    data = pd.read_csv(cleand, encoding='cp949')
 
 # 경력 열에서 경력 값만 추출하여 리스트로 변환
     careers = data['경력'].tolist()
