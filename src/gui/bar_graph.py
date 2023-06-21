@@ -28,7 +28,7 @@ def draw_graph(ax, canvas, cleand, keyword = "default"):
 
     data['경력'] = data['경력'].apply(convert_career)
     careers = data['경력'].tolist()
-    print(careers)
+
 
     # 경력 히스토그램 생성
     ax.hist(careers, bins=10, edgecolor='black')
