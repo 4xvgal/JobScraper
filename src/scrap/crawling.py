@@ -6,6 +6,7 @@ import requests
 import csv
 import os
 import time
+import portalocker
 
 
 
@@ -23,7 +24,11 @@ def select_info(item, section=None):
         else:
             return selected_element.get_text(strip=True).replace('\n','')                                                                  #select_info 함수 만드신거 여기 적용했습니다.
     
-
+# 데이터를 CSV 파일로 저장하기 위한 함수
+def save_to_csv(data, absolute_path):
+    with portalocker.Lock(absolute_path, 'a') as f:
+        csv_writer = csv.writer(f)
+        csv_writer.writerow(data)
 
 def get_info(page_index, url, route, veriable):
     # 사람인 크롤링
@@ -40,7 +45,7 @@ def get_info(page_index, url, route, veriable):
         # 처음 크롤링을 시작할 때 기존의 파일 삭제
         if page_index == 1 and os.path.exists(absolute_path):
             os.remove(absolute_path)
-            if os.path.abspath('C://CSV/merged.csv'):
+            if os.path.exists('C://CSV/merged.csv'):
                 os.remove('C://CSV/merged.csv')
                 
 
@@ -94,13 +99,13 @@ def get_info(page_index, url, route, veriable):
             for item in items:
                 name = select_info(item, 'div.txt > span')
                 form = select_info(item, '.cp-info > p > span:nth-child(1)')
-                carrer = select_info(item, '.cp-info > p > span:nth-child(2)')
+                career = select_info(item, '.cp-info > p > span:nth-child(2)')
                 salary = select_info(item, '.cp-info > p > span:nth-child(4)')
                 locate = select_info(item, '.cp-info > p:nth-child(2) > span:nth-child(1)')
                 locate = locate.replace("근무지", "")
                 education = select_info(item, '.cp-info > p > span:nth-child(3)')
 
-                csvWriter.writerow([name, carrer, education,form, salary, locate])
+                save_to_csv([name, career, education, form, salary, locate], absolute_path)
 
 
         filename = absolute_path  # 기존의 CSV 파일 경로
@@ -108,7 +113,7 @@ def get_info(page_index, url, route, veriable):
 
         # 기존 데이터 읽기
         data = []
-        with open(filename, 'r', encoding='CP949', newline='', errors='ignore') as file:
+        with portalocker.Lock(filename, 'r') as file:
             reader = csv.reader(file)
             data = list(reader)
 
@@ -118,8 +123,8 @@ def get_info(page_index, url, route, veriable):
         # 수정된 데이터를 새로운 파일에 쓰기
         new_filename = r'C:\CSV\worknet_final.csv'                      #워크넷은 workent_final.csv 를 최종적으로 헤더까지 추가된 파일로 지정했습니다 
 
-        with open(new_filename, 'w', encoding='CP949', newline='', errors='ignore') as file:
-            writer = csv.writer(file)
+        with portalocker.Lock(new_filename, 'w') as f:
+            writer = csv.writer(f)
             writer.writerows(data)
 
          

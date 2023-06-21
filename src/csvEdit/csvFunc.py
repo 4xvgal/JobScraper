@@ -11,3 +11,6 @@ def csvEdit(importPath, exportPath, env_encoder): #csvEdit은 입력경로와 �
         reader = csv.DictReader(file)
         cleaned_data = ce.locationConv(reader) #근무지 행 수정
         bf.save_to_csv(cleaned_data,exportPath,env_encoder,False)
+    with open(exportPath, 'r', encoding=env_encoder) as file:
+        reader = csv.DictReader(file)
+        bf.save_to_csv(cleaned_data,exportPath,env_encoder,False)
