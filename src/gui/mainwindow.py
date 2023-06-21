@@ -79,7 +79,8 @@ class MainWindow(QMainWindow):
             # 프로세스 끝나면 csv
             self.ui.timer.stop()
             #CSV 재가공 코드
-            csvEdit(filePath,filePath,'cp949')
+            export_path = r"C:\CSV\merged.cleaned.csv"
+            csvEdit(filePath, export_path,'cp949')
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)
