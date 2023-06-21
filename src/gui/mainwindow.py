@@ -23,6 +23,8 @@ from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
 from scrap.clear_csv import Initialization
 
+
+
 # Important:
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
@@ -32,6 +34,7 @@ filePath = r"C:\CSV\merged.csv"
 export_path = r"C:\CSV\merged.cleaned.csv"
 route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
 cleand = r"C:\CSV\merged.cleaned.csv"
+
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -66,8 +69,7 @@ class MainWindow(QMainWindow):
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
 
-        #그래프 함수 호출
-        self.initUI() 
+       
 
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
@@ -111,6 +113,9 @@ class MainWindow(QMainWindow):
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
 
+            #그래프 함수 호출
+            self.initUI() 
+
     def initUI(self): #그래프 그리기
        # 그래프 1
         fig1, ax1 = plt.subplots()
@@ -128,7 +133,7 @@ class MainWindow(QMainWindow):
         fig3, ax3 = plt.subplots()
         canvas3 = FigureCanvas(fig3)
         self.ui.graph_vertical_tap3.addWidget(canvas3)
-        b.draw_graph(ax3, canvas3, cleand) 
+        b.draw_graph(ax3, canvas3, cleand)
 
 #함수화
 
