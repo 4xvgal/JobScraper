@@ -39,7 +39,6 @@ def page_count(broswer, section):
 def get_items(page_index, url):
 
 
-
     new_url = url.replace("pageIndex=1", f"pageIndex={page_index}")  # page_index 위치에 해당하는 페이지의 주소 new_url
     response = requests.get(new_url)   # 각 페이지 마다 파싱(BeautifulSoup)
     html = response.text
