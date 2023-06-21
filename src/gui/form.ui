@@ -58,7 +58,7 @@
        <item>
         <widget class="QTabWidget" name="Tab4">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="tab_1">
           <attribute name="title">
@@ -102,6 +102,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
+             <layout class="QVBoxLayout" name="verticalLayout_7"/>
+            </item>
+            <item>
              <widget class="QLabel" name="tab2_label1">
               <property name="text">
                <string/>
@@ -126,6 +129,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
+             <layout class="QVBoxLayout" name="verticalLayout_8"/>
+            </item>
+            <item>
              <widget class="QLabel" name="tab3_label1">
               <property name="text">
                <string/>
@@ -149,6 +155,9 @@
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_9"/>
+            </item>
             <item>
              <widget class="QLabel" name="tab4_label1">
               <property name="text">
