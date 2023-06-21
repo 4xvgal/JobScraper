@@ -7,6 +7,7 @@ from startfunction import start
 from absorption_csv import absorption
 import time
 import multiprocessing
+from clear_csv import Initialization
 
 
 
@@ -19,12 +20,15 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
     final_route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
     merged = "C:\CSV\merged.csv"
 
+    if os.path.exists(merged): # 크롤링 실행 전에 파일 존재 유무를 검사해서 중복된 파일을 제거한다.
+        Initialization(route, final_route, merged)
+
     pool = multiprocessing.Pool(processCount)
     pool.starmap(start, [(address, route, keyword) for address in url])
     pool.close()
     pool.join()
 
-    absorption(final_route , merged)
+    absorption(final_route , merged) #두 개의 표본화된 csv 파일에 대한 병합을 실시한다.
 
     
 
