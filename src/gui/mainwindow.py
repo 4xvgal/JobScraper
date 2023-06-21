@@ -20,7 +20,7 @@ from csvEdit.csvFunc import csvEdit
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
 filePath = r"C:\CSV\merged.csv"
-
+export_path = r"C:\CSV\merged.cleaned.csv"
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
             # 프로세스 끝나면 csv
             self.ui.timer.stop()
             #CSV 재가공 코드
-            export_path = r"C:\CSV\merged.cleaned.csv"
+            
             csvEdit(filePath, export_path,'cp949')
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
