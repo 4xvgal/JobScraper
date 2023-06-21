@@ -131,7 +131,6 @@ class MainWindow(QMainWindow):
         b.draw_graph(ax3, canvas3, cleand) 
 
 #함수화
-
 def initGUI():
     if __name__ == "__main__":
         app = QApplication(sys.argv)
