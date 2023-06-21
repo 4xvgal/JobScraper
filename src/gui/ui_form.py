@@ -73,6 +73,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.verticalLayoutWidget_4)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_7 = QVBoxLayout()
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+
+        self.verticalLayout_4.addLayout(self.verticalLayout_7)
+
         self.tab2_label1 = QLabel(self.verticalLayoutWidget_4)
         self.tab2_label1.setObjectName(u"tab2_label1")
 
@@ -87,6 +92,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_8 = QVBoxLayout()
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+
+        self.verticalLayout_5.addLayout(self.verticalLayout_8)
+
         self.tab3_label1 = QLabel(self.verticalLayoutWidget_5)
         self.tab3_label1.setObjectName(u"tab3_label1")
 
@@ -101,6 +111,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_9 = QVBoxLayout()
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+
+        self.verticalLayout_6.addLayout(self.verticalLayout_9)
+
         self.tab4_label1 = QLabel(self.verticalLayoutWidget_6)
         self.tab4_label1.setObjectName(u"tab4_label1")
 
@@ -184,8 +199,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.Tab4.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
+        self.Tab4.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

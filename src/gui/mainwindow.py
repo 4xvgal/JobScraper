@@ -5,6 +5,10 @@ from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import numpy as np
+from . import histogram as his
 import pandas as pd
 #다른 코드들 import
 
@@ -56,6 +60,10 @@ class MainWindow(QMainWindow):
 
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
+
+        #그래프 함수 호출
+        self.initUI() 
+
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         #키워드 전달하기
@@ -97,6 +105,14 @@ class MainWindow(QMainWindow):
 
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
+
+    def initUI(self): #그래프 그리기
+        self.fig, self.ax = plt.subplots()  
+        self.canvas = FigureCanvas(self.fig)  
+        self.ui.graph_vertical.addWidget(self.canvas)  
+
+        his.draw_graph(self.ax, self.canvas)  
+
 #함수화
 
 def initGUI():
