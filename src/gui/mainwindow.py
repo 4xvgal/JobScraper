@@ -13,17 +13,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
-<<<<<<< HEAD
-
-from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-import numpy as np
-from histogram import draw_graph
-
-=======
 from scrap.clear_csv import Initialization
->>>>>>> dev_Fea_PyQtGUI
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -31,12 +21,8 @@ from scrap.clear_csv import Initialization
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
 filePath = r"C:\CSV\merged.csv"
-<<<<<<< HEAD
-
-=======
 export_path = r"C:\CSV\merged.cleaned.csv"
 route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
->>>>>>> dev_Fea_PyQtGUI
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -105,11 +91,7 @@ class MainWindow(QMainWindow):
             print("merging started")
             mergeCsvs(route,filePath)
             #CSV 재가공 코드
-<<<<<<< HEAD
-            csvEdit(filePath,filePath,'cp949')
-=======
             csvEdit(filePath, export_path,'cp949')
->>>>>>> dev_Fea_PyQtGUI
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)
