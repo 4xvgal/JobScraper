@@ -114,32 +114,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.tab3_label1)
 
         self.Tab4.addTab(self.tab_3, "")
-        self.tab_4 = QWidget()
-        self.tab_4.setObjectName(u"tab_4")
-        self.verticalLayoutWidget_6 = QWidget(self.tab_4)
-        self.verticalLayoutWidget_6.setObjectName(u"verticalLayoutWidget_6")
-        self.verticalLayoutWidget_6.setGeometry(QRect(10, 10, 1181, 471))
-        self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_10 = QVBoxLayout()
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.graph_vertical_tap4 = QVBoxLayout()
-        self.graph_vertical_tap4.setObjectName(u"graph_vertical_tap4")
-
-        self.verticalLayout_10.addLayout(self.graph_vertical_tap4)
-
-        self.tab4_label1 = QLabel(self.verticalLayoutWidget_6)
-        self.tab4_label1.setObjectName(u"tab4_label1")
-        self.tab4_label1.setMinimumSize(QSize(1177, 0))
-        self.tab4_label1.setMaximumSize(QSize(1177, 16777215))
-
-        self.verticalLayout_10.addWidget(self.tab4_label1)
-
-
-        self.verticalLayout_6.addLayout(self.verticalLayout_10)
-
-        self.Tab4.addTab(self.tab_4, "")
 
         self.verticalLayout.addWidget(self.Tab4)
 
@@ -218,7 +192,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
-        self.Tab4.setCurrentIndex(3)
+        self.Tab4.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -233,8 +207,6 @@ class Ui_MainWindow(object):
         self.Tab4.setTabText(self.Tab4.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tab 2", None))
         self.tab3_label1.setText("")
         self.Tab4.setTabText(self.Tab4.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Tab 3", None))
-        self.tab4_label1.setText("")
-        self.Tab4.setTabText(self.Tab4.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Tab 4", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Statics), QCoreApplication.translate("MainWindow", u"\ud1b5\uacc4\uce58\ubcf4\uae30", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\uad6c\uc778\uad6c\uc9c1 \uc815\ubcf4 \ud1b5\ud569 \uac80\uc0c9", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uc5b4 \uc785\ub825", None))
