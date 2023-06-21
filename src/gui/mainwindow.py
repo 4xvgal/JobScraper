@@ -134,12 +134,12 @@ class MainWindow(QMainWindow):
         self.ui.graph_vertical_tap2.addWidget(canvas2)
         c.draw_graph(ax2, canvas2, cleand)
 
-        # 그래프 3
+         # 그래프 3
         fig3, ax3 = plt.subplots()
-        self.figure.clear()  
         canvas3 = FigureCanvas(fig3)
         self.ui.graph_vertical_tap3.addWidget(canvas3)
         b.draw_graph(ax3, canvas3, cleand)
+
 
 #함수화
 def initGUI():
