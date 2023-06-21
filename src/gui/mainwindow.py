@@ -57,7 +57,9 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
+        #상태 표시 라벨 텍스트 설정
+        #self.ui.StatusView.setText("Stanby")
+        setStatusText(self,"Stanby")
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
 
@@ -78,7 +80,7 @@ class MainWindow(QMainWindow):
 
         #크롤러 실행
         self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
-
+        setStatusText(self, "Crawlling Started")
         # 크롤러가 끝나면?
         self.ui.timer = QTimer() #<== QTimer 클래스의 객체 self.ui.timer
         self.ui.timer.timeout.connect(self.check_crawler_process) # <== timer 의 설정된 시간 (1000밀리초) 마다 timeout 되어 self.check_crawler_process 객체를 실행  
@@ -91,6 +93,7 @@ class MainWindow(QMainWindow):
         if not self.ui.crawler_process.is_alive(): #<== self.ui.crawler_process 프로세스가 실행 중이 아닐 때
             # 프로세스 끝나면 타이머 종료
             self.ui.timer.stop()
+            setStatusText(self, "Crawlling Done")
             #csv 병합
             print("merging started")
             mergeCsvs(route,filePath)
@@ -102,16 +105,18 @@ class MainWindow(QMainWindow):
 
                 for row in csv_reader:
                     data.append(row)
-
+            setStatusText(self, "Table Generating started")
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
+            setStatusText(self, "Table Generating done")
 
     def initUI(self): #그래프 그리기
         self.fig, self.ax = plt.subplots()  
         self.canvas = FigureCanvas(self.fig)  
         self.ui.graph_vertical.addWidget(self.canvas)  
 
-        his.draw_graph(self.ax, self.canvas)  
+        his.draw_graph(self.ax, self.canvas)
+
 
 #함수화
 
@@ -139,7 +144,7 @@ def touch_merge():
     with open(filePath, 'w') as file:
         print("merge.csv created")
         pass
-
+#csv 파일들 병합
 def mergeCsvs(route, merged):
     saramin = route[0]
     worknet = route[1]
@@ -151,3 +156,7 @@ def mergeCsvs(route, merged):
     merged_df = pd.concat([df1, df2])
     merged_df.to_csv(merged, index=False, encoding='CP949')
     return int(0)
+
+#set text
+def setStatusText(self, text):
+    self.ui.StatusView.setText(text)  

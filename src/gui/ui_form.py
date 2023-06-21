@@ -204,11 +204,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.TimerView = QLabel(self.verticalLayoutWidget_3)
-        self.TimerView.setObjectName(u"TimerView")
-        self.TimerView.setFont(font)
+        self.StatusView = QLabel(self.verticalLayoutWidget_3)
+        self.StatusView.setObjectName(u"StatusView")
+        self.StatusView.setFont(font)
 
-        self.verticalLayout_3.addWidget(self.TimerView)
+        self.verticalLayout_3.addWidget(self.StatusView)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.Tab4.setCurrentIndex(3)
 
 
@@ -250,6 +250,6 @@ class Ui_MainWindow(object):
         self.multiProcess.setItemText(6, QCoreApplication.translate("MainWindow", u"6", None))
         self.multiProcess.setItemText(7, QCoreApplication.translate("MainWindow", u"7", None))
 
-        self.TimerView.setText("")
+        self.StatusView.setText("")
     # retranslateUi
 
