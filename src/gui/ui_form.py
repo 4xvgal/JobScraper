@@ -105,6 +105,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.graph_vertical_tap3 = QVBoxLayout()
         self.graph_vertical_tap3.setObjectName(u"graph_vertical_tap3")
+        self.tap3_widget = QWidget(self.verticalLayoutWidget_5)
+        self.tap3_widget.setObjectName(u"tap3_widget")
+
+        self.graph_vertical_tap3.addWidget(self.tap3_widget)
+
 
         self.verticalLayout_5.addLayout(self.graph_vertical_tap3)
 
@@ -218,7 +223,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
-        self.Tab4.setCurrentIndex(1)
+        self.Tab4.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

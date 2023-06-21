@@ -117,16 +117,17 @@ class MainWindow(QMainWindow):
             self.initUI() 
 
     def initUI(self): #그래프 그리기
-
+        #레이아웃 초기화
+        clearlayout(self.ui.graph_vertical)
+        clearlayout(self.ui.graph_vertical_tap2)
+        clearlayout(self.ui.graph_vertical_tap3)
        # 그래프 1
         if plt.get_fignums():  # 활성화된 figure가 있으면
             plt.figure().clear()  # 이전에 그려진 그래프를 지움
-
         fig1, ax1 = plt.subplots() 
         canvas1 = FigureCanvas(fig1)
         self.ui.graph_vertical.addWidget(canvas1)
         his.draw_graph(ax1, canvas1, cleand)
-
 
         # 그래프 2
         fig2, ax2 = plt.subplots()
@@ -134,13 +135,18 @@ class MainWindow(QMainWindow):
         self.ui.graph_vertical_tap2.addWidget(canvas2)
         c.draw_graph(ax2, canvas2, cleand)
 
-         # 그래프 3
+       
+        # 그래프 3
         fig3, ax3 = plt.subplots()
         canvas3 = FigureCanvas(fig3)
-        self.ui.graph_vertical_tap3.addWidget(canvas3)
+        self.ui.graph_vertical_tap3.addwidget(canvas3)
         b.draw_graph(ax3, canvas3, cleand)
 
 
+def clearlayout(layout):
+    for i in reversed(range(layout.count())):
+        print(layout.itemAt(i))
+        layout.removeItem(layout.itemAt(i))
 #함수화
 def initGUI():
     if __name__ == "__main__":
@@ -178,3 +184,9 @@ def mergeCsvs(route, merged):
     merged_df = pd.concat([df1, df2])
     merged_df.to_csv(merged, index=False, encoding='CP949')
     return int(0)
+
+
+#close_event() 함수
+
+def closeEvent(canvas):
+    canvas.close_event()
