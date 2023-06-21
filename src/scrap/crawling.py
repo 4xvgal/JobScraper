@@ -1,6 +1,7 @@
 #데이터를 크롤링하는 함수입니다.
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 import requests
 import csv
