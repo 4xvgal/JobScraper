@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1280, 720)
+        MainWindow.resize(1680, 720)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
@@ -75,13 +75,24 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_7 = QVBoxLayout()
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_8 = QVBoxLayout()
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.graph_vertical_tap2 = QVBoxLayout()
+        self.graph_vertical_tap2.setObjectName(u"graph_vertical_tap2")
 
-        self.verticalLayout_4.addLayout(self.verticalLayout_7)
+        self.verticalLayout_8.addLayout(self.graph_vertical_tap2)
 
         self.tab2_label1 = QLabel(self.verticalLayoutWidget_4)
         self.tab2_label1.setObjectName(u"tab2_label1")
+        self.tab2_label1.setMinimumSize(QSize(1185, 0))
 
-        self.verticalLayout_4.addWidget(self.tab2_label1)
+        self.verticalLayout_8.addWidget(self.tab2_label1)
+
+
+        self.verticalLayout_7.addLayout(self.verticalLayout_8)
+
+
+        self.verticalLayout_4.addLayout(self.verticalLayout_7)
 
         self.Tab4.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
@@ -92,10 +103,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_8 = QVBoxLayout()
-        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.graph_vertical_tap3 = QVBoxLayout()
+        self.graph_vertical_tap3.setObjectName(u"graph_vertical_tap3")
 
-        self.verticalLayout_5.addLayout(self.verticalLayout_8)
+        self.verticalLayout_5.addLayout(self.graph_vertical_tap3)
 
         self.tab3_label1 = QLabel(self.verticalLayoutWidget_5)
         self.tab3_label1.setObjectName(u"tab3_label1")
@@ -103,25 +114,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.tab3_label1)
 
         self.Tab4.addTab(self.tab_3, "")
-        self.tab_4 = QWidget()
-        self.tab_4.setObjectName(u"tab_4")
-        self.verticalLayoutWidget_6 = QWidget(self.tab_4)
-        self.verticalLayoutWidget_6.setObjectName(u"verticalLayoutWidget_6")
-        self.verticalLayoutWidget_6.setGeometry(QRect(0, 10, 1181, 471))
-        self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_9 = QVBoxLayout()
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-
-        self.verticalLayout_6.addLayout(self.verticalLayout_9)
-
-        self.tab4_label1 = QLabel(self.verticalLayoutWidget_6)
-        self.tab4_label1.setObjectName(u"tab4_label1")
-
-        self.verticalLayout_6.addWidget(self.tab4_label1)
-
-        self.Tab4.addTab(self.tab_4, "")
 
         self.verticalLayout.addWidget(self.Tab4)
 
@@ -156,10 +148,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.search_button)
 
-        self.pushButton = QPushButton(self.horizontalLayoutWidget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.reset_button = QPushButton(self.horizontalLayoutWidget)
+        self.reset_button.setObjectName(u"reset_button")
 
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.horizontalLayout.addWidget(self.reset_button)
 
         self.label_3 = QLabel(self.horizontalLayoutWidget)
         self.label_3.setObjectName(u"label_3")
@@ -186,11 +178,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.TimerView = QLabel(self.verticalLayoutWidget_3)
-        self.TimerView.setObjectName(u"TimerView")
-        self.TimerView.setFont(font)
+        self.StatusView = QLabel(self.verticalLayoutWidget_3)
+        self.StatusView.setObjectName(u"StatusView")
+        self.StatusView.setFont(font)
 
-        self.verticalLayout_3.addWidget(self.TimerView)
+        self.verticalLayout_3.addWidget(self.StatusView)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -199,7 +191,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.Tab4.setCurrentIndex(2)
 
 
@@ -215,13 +207,11 @@ class Ui_MainWindow(object):
         self.Tab4.setTabText(self.Tab4.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tab 2", None))
         self.tab3_label1.setText("")
         self.Tab4.setTabText(self.Tab4.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Tab 3", None))
-        self.tab4_label1.setText("")
-        self.Tab4.setTabText(self.Tab4.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Tab 4", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Statics), QCoreApplication.translate("MainWindow", u"\ud1b5\uacc4\uce58\ubcf4\uae30", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\uad6c\uc778\uad6c\uc9c1 \uc815\ubcf4 \ud1b5\ud569 \uac80\uc0c9", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uc5b4 \uc785\ub825", None))
         self.search_button.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uacb0\uacfc \ucd08\uae30\ud654", None))
+        self.reset_button.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9\uacb0\uacfc \ucd08\uae30\ud654", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\uba40\ud2f0\ud504\ub85c\uc138\uc11c \uc218", None))
         self.multiProcess.setItemText(0, QCoreApplication.translate("MainWindow", u"8", None))
         self.multiProcess.setItemText(1, QCoreApplication.translate("MainWindow", u"1", None))
@@ -232,6 +222,6 @@ class Ui_MainWindow(object):
         self.multiProcess.setItemText(6, QCoreApplication.translate("MainWindow", u"6", None))
         self.multiProcess.setItemText(7, QCoreApplication.translate("MainWindow", u"7", None))
 
-        self.TimerView.setText("")
+        self.StatusView.setText("")
     # retranslateUi
 
