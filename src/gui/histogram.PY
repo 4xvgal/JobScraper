@@ -1,30 +1,10 @@
-import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import font_manager, rc
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
-def create_histogram(file_path):
-    font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()
-    rc('font', family=font_name)
-
-    # CSV 파일을 pandas DataFrame으로 읽어옵니다.
-    data = pd.read_csv(file_path, encoding='cp949')
-
-    # 히스토그램을 생성할 열의 데이터를 선택합니다.
-    edited_salaries = data['edited_연봉']
-
-    # 히스토그램 생성을 위한 설정
-    plt.figure(figsize=(10, 6))  # 그래프 크기 설정
-    plt.hist(edited_salaries, bins=10)  # 히스토그램 생성 (구간 수는 bins 매개변수로 조정 가능)
-
-    # 그래프에 제목과 축 레이블 추가
-    plt.title('연봉 분포')
-    plt.xlabel('연봉')
-    plt.ylabel('빈도')
-
-    # 그래프 출력
-    plt.show()
-
-# 함수 호출 예시
-file_path = r'C:\CSV\cleaned.csv'
-create_histogram(file_path)
+def draw_graph(self):
+        x = np.linspace(0, 10, 100)
+        y = np.sin(x)
+        self.ax.plot(x, y)  # sin 함수를 그립니다.
+        self.canvas.draw()  # 그래프를 캔버스에 그립니다.
 

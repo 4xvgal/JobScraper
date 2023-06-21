@@ -13,6 +13,12 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
 
+from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import numpy as np
+from histogram import draw_graph
+
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -20,7 +26,7 @@ from csvEdit.csvFunc import csvEdit
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
 filePath = r"C:\CSV\merged.csv"
-export_path = r"C:\CSV\merged.cleaned.csv"
+
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -54,6 +60,10 @@ class MainWindow(QMainWindow):
 
         # 검색버튼을 클릭할때 함수 실행
         self.ui.search_button.clicked.connect(self.initSearch)
+
+        #그래프 함수 호출
+        self.initUI() 
+
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
         #키워드 전달하기
@@ -79,8 +89,7 @@ class MainWindow(QMainWindow):
             # 프로세스 끝나면 csv
             self.ui.timer.stop()
             #CSV 재가공 코드
-            
-            csvEdit(filePath, export_path,'cp949')
+            csvEdit(filePath,filePath,'cp949')
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)
@@ -90,6 +99,14 @@ class MainWindow(QMainWindow):
 
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
+
+    def initUI(self): #그래프 그리기
+        self.fig, self.ax = plt.subplots()  
+        self.canvas = FigureCanvas(self.fig)  
+        self.ui.graph_vertical.addWidget(self.canvas)  
+
+        draw_graph(self.ax, self.canvas)  
+
 #함수화
 
 def initGUI():
