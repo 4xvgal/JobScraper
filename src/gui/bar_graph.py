@@ -31,6 +31,8 @@ def draw_graph(ax, canvas, cleand, keyword = "default"):
 
 
     # 경력 히스토그램 생성
+
+    plt.xticks(fontsize=6.5)
     ax.hist(careers, bins=10, edgecolor='black')
 
     # 그래프 제목과 축 레이블 설정
