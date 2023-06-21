@@ -141,7 +141,7 @@ class MainWindow(QMainWindow):
         # 그래프 3
         fig3, ax3 = plt.subplots()
         canvas3 = FigureCanvas(fig3)
-        self.ui.graph_vertical_tap3.addwidget(canvas3)
+        self.ui.graph_vertical_tap3.addWidget(canvas3)
         b.draw_graph(ax3, canvas3, cleand,keyword)
 
 
