@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1680</width>
     <height>720</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="ListViewer">
      <attribute name="title">
@@ -102,14 +102,28 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_7"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="tab2_label1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_8">
+                <item>
+                 <layout class="QVBoxLayout" name="graph_vertical_tap2"/>
+                </item>
+                <item>
+                 <widget class="QLabel" name="tab2_label1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>1185</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -129,37 +143,10 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_8"/>
+             <layout class="QVBoxLayout" name="graph_vertical_tap3"/>
             </item>
             <item>
              <widget class="QLabel" name="tab3_label1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="tab_4">
-          <attribute name="title">
-           <string>Tab 4</string>
-          </attribute>
-          <widget class="QWidget" name="verticalLayoutWidget_6">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>10</y>
-             <width>1181</width>
-             <height>471</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_9"/>
-            </item>
-            <item>
-             <widget class="QLabel" name="tab4_label1">
               <property name="text">
                <string/>
               </property>
