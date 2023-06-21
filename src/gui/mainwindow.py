@@ -75,6 +75,7 @@ class MainWindow(QMainWindow):
 
     # 검색버튼 눌러질때 실행되는 함수
     def initSearch(self):
+        global keyword
         #키워드 전달하기
         processCount = int(self.ui.multiProcess.currentText()) #multiProcess 콤보박스 오브젝트에서 값 가져오기
         keyword = self.ui.search_keyword_lineEdit.text() # search_keyword_lineedit 오브젝트에서 값 가져오기
