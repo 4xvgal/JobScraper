@@ -5,7 +5,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib import font_manager, rc
 import os
 
-def draw_graph(ax, canvas, cleand):
+def draw_graph(ax, canvas, cleand, keyword = "default"):
 
 
     font_name = font_manager.FontProperties(fname=r"c:/Windows/Fonts/malgun.ttf").get_name()
@@ -25,7 +25,7 @@ def draw_graph(ax, canvas, cleand):
     ax.pie(top_two_regions, labels=top_two_regions.index, autopct='%1.1f%%', startangle=90)
 
     # 그래프 스타일 설정
-    ax.set_title('Job counts by region (minor regions grouped as "others")')
+    ax.set_title(keyword + 'Job counts by region (minor regions grouped as "others")')
     ax.plot
     canvas.draw()
     
