@@ -44,17 +44,3 @@ def remove_non_list_strings(string, list_):
         return string
     
 
-def modify_education_column(importPath, exportPath,):
-    # CSV 파일을 pandas 데이터프레임으로 읽어오기
-    data = pd.read_csv(importPath, encoding='cp949')
-
-    # 학력 열 데이터 수정
-    for i in range(len(data['학력'])):
-        if '학력' not in data['학력'][i]:
-            data['학력'][i] = data['학력'][i][:2]
-
-    # 수정된 데이터 확인
-    print(data['학력'])
-
-    # 수정된 데이터를 CSV 파일로 저장
-    data.to_csv(exportPath, index=False, encoding='cp949')
