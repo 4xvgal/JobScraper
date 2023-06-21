@@ -21,6 +21,8 @@ from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
 from scrap.clear_csv import Initialization
 
+from . import circle_graph as c
+from . import bar_graph as b
 
 
 # Important:
@@ -123,18 +125,8 @@ class MainWindow(QMainWindow):
             model = CSVTableModel(data)
             self.ui.ShowingCSV.setModel(model)
             setStatusText(self, "Table Generating done")
-
-    def initUI(self): #그래프 그리기
-        self.fig, self.ax = plt.subplots()  
-        self.canvas = FigureCanvas(self.fig)  
-        self.ui.graph_vertical.addWidget(self.canvas)  
-
-        his.draw_graph(self.ax, self.canvas)
-
-
-        #그래프 함수 호출
-        self.initUI() 
-
+            #그래프 함수 호출
+            self.initUI() 
 
     def initUI(self): #그래프 그리기
         #레이아웃 초기화

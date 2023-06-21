@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1680</width>
+    <width>1288</width>
     <height>720</height>
    </rect>
   </property>
@@ -206,7 +206,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="reset_button">
        <property name="text">
         <string>검색결과 초기화</string>
        </property>
@@ -281,7 +281,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QLabel" name="TimerView">
+      <widget class="QLabel" name="StatusView">
        <property name="font">
         <font>
          <family>Nanum Gothic</family>
