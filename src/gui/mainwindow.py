@@ -21,6 +21,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
+from csvEdit.csvEditors import modify_education_column
 from scrap.clear_csv import Initialization
 
 
@@ -103,6 +104,7 @@ class MainWindow(QMainWindow):
             mergeCsvs(route,filePath)
             #CSV 재가공 코드
             csvEdit(filePath, export_path,'cp949')
+            modify_education_column(filePath, export_path)
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)
