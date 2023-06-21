@@ -5,6 +5,7 @@ from multiprocessing import Process
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import Qt, QAbstractTableModel
 from PySide6.QtCore import QTimer
+import pandas as pd
 #다른 코드들 import
 
 import sys
@@ -12,6 +13,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from scrap.scrap_init import run_crawling
 from csvEdit.csvFunc import csvEdit
+<<<<<<< HEAD
 
 from PySide6.QtWidgets import QApplication, QVBoxLayout, QWidget
 import matplotlib.pyplot as plt
@@ -19,6 +21,9 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
 from histogram import draw_graph
 
+=======
+from scrap.clear_csv import Initialization
+>>>>>>> dev_Fea_PyQtGUI
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -26,7 +31,12 @@ from histogram import draw_graph
 #     pyside2-uic form.ui -o ui_form.py
 from gui.ui_form import Ui_MainWindow
 filePath = r"C:\CSV\merged.csv"
+<<<<<<< HEAD
 
+=======
+export_path = r"C:\CSV\merged.cleaned.csv"
+route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
+>>>>>>> dev_Fea_PyQtGUI
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -72,7 +82,10 @@ class MainWindow(QMainWindow):
         
         # 키워드 잘 가져오는지 디버깅용 출력
         print(keyword, processCount)
-        
+
+        #사전 파일 초기화
+        init_files()
+
         #크롤러 실행
         self.ui.crawler_process = run_crawler_in_separate_process(keyword, processCount)
 
@@ -86,10 +99,17 @@ class MainWindow(QMainWindow):
         # is_alive() 는 mutliprocess.process 클래스의 메서드입니다.
 
         if not self.ui.crawler_process.is_alive(): #<== self.ui.crawler_process 프로세스가 실행 중이 아닐 때
-            # 프로세스 끝나면 csv
+            # 프로세스 끝나면 타이머 종료
             self.ui.timer.stop()
+            #csv 병합
+            print("merging started")
+            mergeCsvs(route,filePath)
             #CSV 재가공 코드
+<<<<<<< HEAD
             csvEdit(filePath,filePath,'cp949')
+=======
+            csvEdit(filePath, export_path,'cp949')
+>>>>>>> dev_Fea_PyQtGUI
             data = []
             with open(filePath, 'r', encoding='cp949') as file:
                 csv_reader = csv.reader(file)
@@ -120,3 +140,28 @@ def initGUI():
         widget = MainWindow()
         widget.show()
         sys.exit(app.exec())
+#사전 파일 초기화 함수
+def init_files():
+    if os.path.exists(filePath): # 크롤링 실행 전에 파일 존재 유무를 검사해서 중복된 파일을 제거한다.
+        print("merge.csv found.")
+        os.remove(filePath)
+    elif (not os.path.exists(filePath)):
+        print("merge.csv not found")
+    touch_merge()
+# 머지 생성
+def touch_merge():
+    with open(filePath, 'w') as file:
+        print("merge.csv created")
+        pass
+
+def mergeCsvs(route, merged):
+    saramin = route[0]
+    worknet = route[1]
+    
+
+    df1 = pd.read_csv(worknet, encoding='CP949')
+    df2 = pd.read_csv(saramin, encoding='CP949')
+
+    merged_df = pd.concat([df1, df2])
+    merged_df.to_csv(merged, index=False, encoding='CP949')
+    return int(0)
