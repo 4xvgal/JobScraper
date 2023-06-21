@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
 from . import hisFunc as his
+from . import circle_graph as c
+from . import bar_graph as b
 import pandas as pd
 #다른 코드들 import
 
@@ -29,6 +31,7 @@ from gui.ui_form import Ui_MainWindow
 filePath = r"C:\CSV\merged.csv"
 export_path = r"C:\CSV\merged.cleaned.csv"
 route = ["C:\CSV\saramin_final.csv", "C:\CSV\worknet_final.csv"]
+cleand = r"C:\CSV\merged.cleaned.csv"
 def run_crawler_in_separate_process(keyword, processCount):
     crawler_process = Process(target=run_crawling, args=(keyword, processCount))
     crawler_process.start()
@@ -109,11 +112,23 @@ class MainWindow(QMainWindow):
             self.ui.ShowingCSV.setModel(model)
 
     def initUI(self): #그래프 그리기
-        self.fig, self.ax = plt.subplots()  
-        self.canvas = FigureCanvas(self.fig)  
-        self.ui.graph_vertical.addWidget(self.canvas)  
+       # 그래프 1
+        fig1, ax1 = plt.subplots()
+        canvas1 = FigureCanvas(fig1)
+        self.ui.graph_vertical.addWidget(canvas1)
+        his.draw_graph(ax1, canvas1, cleand)
 
-        his.draw_graph(self.ax, self.canvas)  
+        # 그래프 2
+        fig2, ax2 = plt.subplots()
+        canvas2 = FigureCanvas(fig2)
+        self.ui.graph_vertical_tap2.addWidget(canvas2)
+        c.draw_graph(ax2, canvas2, cleand)
+
+        # 그래프 3
+        fig3, ax3 = plt.subplots()
+        canvas3 = FigureCanvas(fig3)
+        self.ui.graph_vertical_tap3.addWidget(canvas3)
+        b.draw_graph(ax3, canvas3, cleand) 
 
 #함수화
 
