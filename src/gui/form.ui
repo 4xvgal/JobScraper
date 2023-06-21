@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="ListViewer">
      <attribute name="title">
@@ -56,11 +56,11 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTabWidget" name="tabWidget_2">
+        <widget class="QTabWidget" name="Tab4">
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
-         <widget class="QWidget" name="tab">
+         <widget class="QWidget" name="tab_1">
           <attribute name="title">
            <string>Tab 1</string>
           </attribute>
@@ -75,9 +75,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
-             <widget class="QLabel" name="label_4">
+             <widget class="QLabel" name="tab1_label1">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -99,9 +99,9 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="tab2_label1">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -110,22 +110,22 @@
          </widget>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
-           <string>Page</string>
+           <string>Tab 3</string>
           </attribute>
           <widget class="QWidget" name="verticalLayoutWidget_5">
            <property name="geometry">
             <rect>
-             <x>240</x>
-             <y>140</y>
-             <width>160</width>
-             <height>80</height>
+             <x>10</x>
+             <y>10</y>
+             <width>1181</width>
+             <height>471</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="tab3_label1">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -134,22 +134,22 @@
          </widget>
          <widget class="QWidget" name="tab_4">
           <attribute name="title">
-           <string>Page</string>
+           <string>Tab 4</string>
           </attribute>
           <widget class="QWidget" name="verticalLayoutWidget_6">
            <property name="geometry">
             <rect>
-             <x>200</x>
-             <y>220</y>
-             <width>160</width>
-             <height>80</height>
+             <x>0</x>
+             <y>10</y>
+             <width>1181</width>
+             <height>471</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="tab4_label1">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
               </property>
              </widget>
             </item>
