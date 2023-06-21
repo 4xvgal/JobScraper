@@ -13,7 +13,8 @@ def absorption(route, merged):
         with open(merged, 'w') as file:
             print("merge file created")
             pass
-
+    else:
+        print("merge existed")
     merged_df = pd.concat([df1, df2])
     merged_df.to_csv(merged, index=False, encoding='CP949')
      

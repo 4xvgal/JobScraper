@@ -22,7 +22,11 @@ def run_crawling(keyword, processCount): #검색어, 멀티프로세서 수
 
     if os.path.exists(merged): # 크롤링 실행 전에 파일 존재 유무를 검사해서 중복된 파일을 제거한다.
         Initialization(route, final_route, merged)
-
+    elif (not os.path.exists(merged)):
+        print("머지 없음 생성함")
+        with open(merged, 'w') as file:
+            print("merge file created")
+            pass
     pool = multiprocessing.Pool(processCount)
     pool.starmap(start, [(address, route, keyword) for address in url])
     pool.close()
